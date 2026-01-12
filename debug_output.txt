@@ -1,0 +1,12 @@
+--- DEBUGGER START ---
+1. Checking Environment Options...
+   MONGO_URI is SET (Length: 34)
+
+2. Testing MongoDB Connection...
+   MongoDB Connection: SUCCESS
+
+3. Testing Server API (http://localhost:5000/api/patient/dashboard/errorcheck)...
+   Server responded with STATUS: 400
+   Headers: {"x-powered-by":"Express","access-control-allow-origin":"*","content-type":"application/json; charset=utf-8","content-length":"48","etag":"W/\"30-KM4u8Ce3kW3zx5QW9uBdzMlePFc\"","date":"Thu, 08 Jan 2026 10:39:05 GMT","connection":"keep-alive","keep-alive":"timeout=5"}
+   Response Body: {"success":false,"message":"Invalid Patient ID"}
+   Response received.

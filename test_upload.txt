@@ -1,0 +1,3 @@
+This is a dummy file for testing patient file uploads.
+It contains some text content.
+End of file.

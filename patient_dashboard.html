@@ -1,41 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dental Clinic Dashboard</title>
 
   <style>
-    body { margin:0;padding:0;font-family:'Poppins',sans-serif;display:flex;height:100vh;background:#f5f7fb;overflow:hidden;}
-    .sidebar{width:260px;background:#0A224C;color:white;padding:25px 20px;display:flex;flex-direction:column;gap:15px;height:100%;}
-    .sidebar h2{font-size:22px;margin-bottom:10px;font-weight:700;}
-    .menu-item{padding:12px 15px;border-radius:10px;cursor:pointer;font-size:15px;font-weight:500;transition:0.3s;}
-    .menu-item:hover,.menu-item.active{background:white;color:#0A224C;font-weight:600;}
-    .main{flex:1;padding:30px 40px;overflow-y:auto;}
-    .box{background:white;padding:30px;border-radius:18px;border:2px solid #0A224C;box-shadow:0px 10px 20px rgba(0,0,0,0.08);max-width:850px;margin-bottom:35px;}
-    h1{color:#0A224C;margin:0 0 20px;font-weight:700;}
-    label{font-weight:600;color:#0A224C;font-size:14px;}
-    input,select,textarea{width:100%;padding:12px;border-radius:10px;border:1.6px solid #cfd8e6;margin-top:6px;margin-bottom:20px;font-size:14px;}
-    button{background:#0A224C;padding:12px 25px;border-radius:10px;border:none;color:white;cursor:pointer;font-size:16px;font-weight:600;}
-    table{width:100%;border-collapse:collapse;margin-top:10px;}
-    table td,table th{padding:12px;border-bottom:1px solid #d0d7e8;}
-    table th{background:#0A224C;color:white;text-align:left;}
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      height: 100vh;
+      background: #f5f7fb;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      width: 260px;
+      background: #0A224C;
+      color: white;
+      padding: 25px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      height: 100%;
+    }
+
+    .sidebar h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .menu-item {
+      padding: 12px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .menu-item:hover,
+    .menu-item.active {
+      background: white;
+      color: #0A224C;
+      font-weight: 600;
+    }
+
+    .main {
+      flex: 1;
+      padding: 30px 40px;
+      overflow-y: auto;
+    }
+
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 18px;
+      border: 2px solid #0A224C;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.08);
+      max-width: 850px;
+      margin-bottom: 35px;
+    }
+
+    h1 {
+      color: #0A224C;
+      margin: 0 0 20px;
+      font-weight: 700;
+    }
+
+    label {
+      font-weight: 600;
+      color: #0A224C;
+      font-size: 14px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1.6px solid #cfd8e6;
+      margin-top: 6px;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    button {
+      background: #0A224C;
+      padding: 12px 25px;
+      border-radius: 10px;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    table td,
+    table th {
+      padding: 12px;
+      border-bottom: 1px solid #d0d7e8;
+    }
+
+    table th {
+      background: #0A224C;
+      color: white;
+      text-align: left;
+    }
 
     /* ⭐ Rating stars */
-    .star-row{
-      display:flex;
-      gap:8px;
-      margin:6px 0 16px;
-      font-size:24px;
+    .star-row {
+      display: flex;
+      gap: 8px;
+      margin: 6px 0 16px;
+      font-size: 24px;
     }
-    .star{
-      cursor:pointer;
-      color:#cfd8e6;
-      transition:color 0.2s;
-      user-select:none;
+
+    .star {
+      cursor: pointer;
+      color: #cfd8e6;
+      transition: color 0.2s;
+      user-select: none;
     }
-    .star.selected{
-      color:#f4b400;
+
+    .star.selected {
+      color: #f4b400;
+    }
+
+    /* Notification Styles */
+    .notification-badge {
+      background: #ff4757;
+      color: white;
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 99px;
+      margin-left: auto;
+      font-weight: bold;
+    }
+
+    .notif-item {
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+      background: #fff;
+    }
+
+    .notif-item.unread {
+      background: #f0f7ff;
+      border-left: 4px solid #0A224C;
+    }
+
+    .notif-date {
+      font-size: 12px;
+      color: #888;
+      margin-top: 5px;
     }
   </style>
 </head>
@@ -49,6 +177,9 @@
     <div class="menu-item" onclick="loadSection('appointment', this)">Book Appointment</div>
     <div class="menu-item" onclick="loadSection('history', this)">Appointment History</div>
     <div class="menu-item" onclick="loadSection('feedback', this)">Feedback</div>
+    <div class="menu-item" onclick="loadSection('notifications', this)">
+      Notifications <span id="notifBadge" class="notification-badge" style="display:none">0</span>
+    </div>
     <div class="menu-item" onclick="logout()">Logout</div>
   </div>
 
@@ -110,6 +241,9 @@
                   <label>Patient Name</label>
                   <input type="text" value="${userName}" disabled>
 
+                  <label>Mobile Number</label>
+                  <input type="text" id="patientMobile" value="${user.mobile || ''}" placeholder="Enter mobile number">
+
                   <label>Select Doctor</label>
                   <select id="doctorSelect"><option>Loading doctors...</option></select>
 
@@ -127,12 +261,6 @@
 
                   <button onclick="saveAppointment()">Book Appointment</button>
                 </div>`;
-      }
-
-      // PRESCRIPTION
-      if (section === "prescription") {
-        html = `<div class="box"><h1>Prescription Download</h1>
-                <p>Loading prescriptions...</p></div>`;
       }
 
       // HISTORY
@@ -159,11 +287,38 @@
                 </div>`;
       }
 
+      // NOTIFICATIONS
+      if (section === "notifications") {
+        html = `<div class="box">
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+                    <h1 style="margin:0">Notifications</h1>
+                    <button style="font-size:13px;padding:8px 14px" onclick="markAllRead()">Mark all read</button>
+                  </div>
+                  <div id="notifList">Loading...</div>
+                </div>`;
+        fetchNotifications(true);
+      }
+
       document.getElementById("main-content").innerHTML = html;
 
       // init stars if on feedback section
       if (section === "feedback") {
         setupRatingStars();
+      }
+
+      // 🔹 Set minimum date to today (disable past dates)
+      if (section === "appointment") {
+        const today = new Date().toISOString().split('T')[0];
+        const dateInput = document.getElementById("appt_date");
+        if (dateInput) {
+          dateInput.min = today;
+        }
+
+        // 🔹 Add event listeners to update available time slots
+        const doctorSelect = document.getElementById("doctorSelect");
+        const dateInput2 = document.getElementById("appt_date");
+        if (doctorSelect) doctorSelect.addEventListener("change", updateAvailableSlots);
+        if (dateInput2) dateInput2.addEventListener("change", updateAvailableSlots);
       }
 
       // 🔹 Load doctors for dropdown (public route, no token needed)
@@ -194,39 +349,20 @@
           if (!res.ok) throw new Error("Failed to fetch");
           const data = await res.json();
 
-          // PRESCRIPTIONS TABLE
-          if (section === "prescription" && data.prescriptions) {
-            const presHtml = `<div class="box"><h1>Prescription Download</h1>
-              <table>
-                <tr><th>Date</th><th>Doctor</th><th>Action</th></tr>
-                ${data.prescriptions
-                  .map(
-                    p => `<tr>
-                      <td>${new Date(p.date).toLocaleDateString()}</td>
-                      <td>${p.doctorName}</td>
-                      <td><button onclick="downloadPrescription('${p.fileUrl}')">
-                          Download</button></td>
-                    </tr>`
-                  )
-                  .join("")}
-              </table></div>`;
-            document.getElementById("main-content").innerHTML = presHtml;
-          }
-
           // APPOINTMENT HISTORY TABLE
           if (section === "history" && data.appointments) {
             const histHtml = `<div class="box"><h1>Appointment History</h1>
               <table>
                 <tr><th>Date</th><th>Doctor</th><th>Status</th></tr>
                 ${data.appointments
-                  .map(
-                    a => `<tr>
+                .map(
+                  a => `<tr>
                       <td>${new Date(a.date).toLocaleDateString()}</td>
                       <td>${a.doctorName}</td>
                       <td>${a.status}</td>
                     </tr>`
-                  )
-                  .join("")}
+                )
+                .join("")}
               </table></div>`;
             document.getElementById("main-content").innerHTML = histHtml;
           }
@@ -256,18 +392,80 @@
       });
     }
 
+    // 🔹 Update available time slots based on doctor and date
+    async function updateAvailableSlots() {
+      const doctorId = document.getElementById("doctorSelect").value;
+      const date = document.getElementById("appt_date").value;
+      const timeSelect = document.getElementById("appt_time");
+
+      // Reset time slots to all available
+      const allSlots = ['10:00 AM', '11:00 AM', '02:00 PM', '03:00 PM'];
+      timeSelect.innerHTML = '<option value="">Select time</option>';
+
+      if (!doctorId || !date) {
+        allSlots.forEach(slot => {
+          const opt = document.createElement('option');
+          opt.value = slot;
+          opt.innerText = slot;
+          timeSelect.appendChild(opt);
+        });
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE}/api/admin/appointments/public/doctor/availability?doctorId=${doctorId}&date=${date}`);
+        const data = await res.json();
+
+        if (data.success) {
+          const occupied = data.occupied || [];
+          allSlots.forEach(slot => {
+            const opt = document.createElement('option');
+            opt.value = slot;
+            opt.innerText = slot;
+            if (occupied.includes(slot)) {
+              opt.disabled = true;
+              opt.innerText = slot + ' (Booked)';
+            }
+            timeSelect.appendChild(opt);
+          });
+        } else {
+          allSlots.forEach(slot => {
+            const opt = document.createElement('option');
+            opt.value = slot;
+            opt.innerText = slot;
+            timeSelect.appendChild(opt);
+          });
+        }
+      } catch (err) {
+        console.error('Failed to fetch availability:', err);
+        allSlots.forEach(slot => {
+          const opt = document.createElement('option');
+          opt.value = slot;
+          opt.innerText = slot;
+          timeSelect.appendChild(opt);
+        });
+      }
+    }
+
     // 🔹 Save appointment to BACKEND
     async function saveAppointment() {
       const doctorId = document.getElementById("doctorSelect").value;
       const date = document.getElementById("appt_date").value;
       const timeSlot = document.getElementById("appt_time").value;
+      const mobile = document.getElementById("patientMobile").value.trim();
 
-      if (!patientId || !doctorId || !date || !timeSlot) {
+      if (!patientId || !doctorId || !date || !timeSlot || !mobile) {
         alert("All fields are required");
         return;
       }
 
-      const payload = { patientId, doctorId, date, timeSlot };
+      // Optional: Validate mobile number format
+      if (!/^\d{10}$/.test(mobile)) {
+        alert("Please enter a valid 10-digit mobile number");
+        return;
+      }
+
+      const payload = { patientId, doctorId, date, timeSlot, mobile };
       console.log("DEBUG APPT PAYLOAD:", payload);
 
       try {
@@ -285,7 +483,7 @@
         }
 
         alert("Appointment booked successfully!");
-        const historyItem = document.querySelectorAll(".menu-item")[3];
+        const historyItem = document.querySelectorAll(".menu-item")[2];
         loadSection("history", historyItem);
       } catch (err) {
         console.error(err);
@@ -340,10 +538,6 @@
       }
     }
 
-    function downloadPrescription(url) {
-      window.open(url, "_blank");
-    }
-
     function logout() {
       localStorage.clear();
       window.location.href = "login.html";
@@ -351,7 +545,74 @@
 
     // Load Home initially
     loadSection("home", document.querySelector(".menu-item.active"));
+
+    // Initial fetch for badge
+    fetchNotifications(false);
+
+    // Poll for notifications every 30 seconds
+    setInterval(() => fetchNotifications(false), 30000);
+
+    // 🔹 Notification Logic
+    async function fetchNotifications(render = false) {
+      if (!user.token) return;
+      try {
+        const res = await fetch(`${API_BASE}/api/notifications`, {
+          headers: { "Authorization": "Bearer " + user.token }
+        });
+        const data = await res.json();
+        if (data.success) {
+          const unreadCount = data.notifications.filter(n => !n.isRead).length;
+          const badge = document.getElementById("notifBadge");
+          if (badge) {
+            badge.innerText = unreadCount;
+            badge.style.display = unreadCount > 0 ? "inline-block" : "none";
+          }
+
+          if (render) {
+            const list = document.getElementById("notifList");
+            if (list) {
+              if (data.notifications.length === 0) {
+                list.innerHTML = "<p>No notifications yet.</p>";
+              } else {
+                list.innerHTML = data.notifications.map(n => `
+                                <div class="notif-item ${n.isRead ? '' : 'unread'}" onclick="markRead('${n._id}')">
+                                    <div style="font-weight:600">${n.message}</div>
+                                    <div class="notif-date">${new Date(n.createdAt).toLocaleString()}</div>
+                                </div>
+                            `).join("");
+              }
+            }
+          }
+        }
+      } catch (e) {
+        console.error("Notif Fetch Error", e);
+      }
+    }
+
+    async function markRead(id) {
+      // optimistically mark as read in UI
+      // In a real app we might re-fetch or toggle class, but simpler to just re-fetch for now
+      try {
+        await fetch(`${API_BASE}/api/notifications/${id}/read`, {
+          method: 'PATCH',
+          headers: { "Authorization": "Bearer " + user.token }
+        });
+        fetchNotifications(true); // refresh list
+      } catch (e) { console.error(e); }
+    }
+
+    async function markAllRead() {
+      if (!confirm("Mark all as read?")) return;
+      try {
+        await fetch(`${API_BASE}/api/notifications/mark-all-read`, {
+          method: 'PATCH',
+          headers: { "Authorization": "Bearer " + user.token }
+        });
+        fetchNotifications(true);
+      } catch (e) { console.error(e); }
+    }
   </script>
 
 </body>
+
 </html>

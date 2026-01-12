@@ -1,4 +1,3 @@
-// models/CallbackRequest.js
 const mongoose = require('mongoose');
 
 const CallbackRequestSchema = new mongoose.Schema({
@@ -12,14 +11,14 @@ const CallbackRequestSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  message: {
-    type: String,
-    trim: true,
-    default: ''
-  },
   contacted: {
     type: Boolean,
     default: false
+  },
+  status: {
+    type: String,
+    enum: ["Pending", "Done"],
+    default: "Pending"
   }
 }, { timestamps: true });
 

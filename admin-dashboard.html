@@ -1,56 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin — Manage Users</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Manage Users & Appointments</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --nav:#0A224C;
-      --bg:#f5f7fb;
-      --card:#ffffff;
-      --muted:#cfd8e6;
-      --accent:#0A224C;
-      --radius:12px;
+    :root {
+      --nav: #0A224C;
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --muted: #cfd8e6;
+      --accent: #0A224C;
+      --radius: 12px;
     }
-    *{box-sizing:border-box}
-    body{ margin:0; padding:0; font-family:'Poppins',sans-serif; background:var(--bg); height:100vh; display:flex; overflow:hidden; }
 
-    .sidebar{ width:260px; background:var(--nav); color:#fff; padding:28px 20px; display:flex; flex-direction:column; gap:14px; }
-    .brand{ font-size:20px; font-weight:700 }
-    .menu-item{ padding:12px 14px; border-radius:10px; cursor:pointer; font-size:15px; font-weight:500; transition:all .18s; }
-    .menu-item:hover,.menu-item.active{ background:#fff; color:var(--nav); font-weight:600; }
+    * {
+      box-sizing: border-box
+    }
 
-    .main{ flex:1; padding:24px; overflow:auto; }
-    header{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:18px; }
-    .btn{ background:var(--accent); color:#fff; padding:10px 14px; border-radius:10px; border:none; cursor:pointer; font-weight:600; }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      height: 100vh;
+      display: flex;
+      overflow: hidden;
+    }
 
-    .row{ display:flex; gap:18px; margin-bottom:18px; flex-wrap:wrap; }
-    .card{ background:var(--card); padding:18px; border-radius:18px; box-shadow:0 8px 20px rgba(0,0,0,0.06); flex:1; border:2px solid var(--nav); min-width:300px; }
-    .card h3{ margin:0 0 8px; color:var(--nav); display:flex; align-items:center; justify-content:space-between; gap:8px; }
-    .small{ font-size:13px; color:#666 }
+    .sidebar {
+      width: 260px;
+      background: var(--nav);
+      color: #fff;
+      padding: 28px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
 
-    table{ width:100%; border-collapse:collapse; margin-top:12px; font-size:14px; }
-    th,td{ padding:10px; border-bottom:1px solid #e6edf6; text-align:left; vertical-align:middle; }
-    th{ background:var(--nav); color:#fff; }
-    .actions button{ margin-right:6px; }
+    .brand {
+      font-size: 20px;
+      font-weight: 700
+    }
 
-    .status-pill{ display:inline-block; padding:4px 10px; border-radius:999px; font-size:12px; font-weight:600; }
-    .status-Pending{ background:#fff3cd; color:#856404; border:1px solid #ffeeba; }
-    .status-Contacted{ background:#d4edda; color:#155724; border:1px solid #c3e6cb; }
+    .menu-item {
+      padding: 12px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 500;
+      transition: all .18s;
+    }
 
-    .modal-backdrop{ position:fixed; inset:0; background:rgba(0,0,0,0.45); display:none; align-items:center; justify-content:center; z-index:999; }
-    .modal{ background:#fff; padding:18px; border-radius:14px; min-width:320px; max-width:700px; max-height:80vh; overflow:auto; }
+    .menu-item:hover,
+    .menu-item.active {
+      background: #fff;
+      color: var(--nav);
+      font-weight: 600;
+    }
 
-    label{ display:block; font-weight:600; color:var(--nav); margin-top:8px; }
-    input,select,textarea{ width:100%; padding:10px; border-radius:8px; border:1.6px solid var(--muted); margin-top:6px; }
+    .main {
+      flex: 1;
+      padding: 24px;
+      overflow: auto;
+    }
 
-    footer{ margin-top:28px; color:#666; font-size:13px; }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
 
-    @media(max-width:900px){ .row{flex-direction:column} .sidebar{display:none} }
+    .btn {
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .row {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 18px;
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+      flex: 1;
+      border: 2px solid var(--nav);
+      min-width: 300px;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      color: var(--nav);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .small {
+      font-size: 13px;
+      color: #666
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      border-bottom: 1px solid #e6edf6;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    th {
+      background: var(--nav);
+      color: #fff;
+    }
+
+    .actions button {
+      margin-right: 6px;
+    }
+
+    .status-pill {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .status-Pending {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+    }
+
+    .status-Contacted {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .status-Completed {
+      background: #cce5ff;
+      color: #004085;
+      border: 1px solid #b8daff;
+    }
+
+    .status-Cancelled {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .status-Acknowledged {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+    }
+
+    /* shows as ACKNOWLEDGE */
+    .status-Done {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .btn.selected {
+      outline: 2px solid rgba(10, 34, 76, 0.12);
+      box-shadow: 0 2px 6px rgba(10, 34, 76, 0.06);
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    .modal {
+      background: #fff;
+      padding: 18px;
+      border-radius: 14px;
+      min-width: 320px;
+      max-width: 700px;
+      max-height: 80vh;
+      overflow: auto;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      color: var(--nav);
+      margin-top: 8px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1.6px solid var(--muted);
+      margin-top: 6px;
+    }
+
+    footer {
+      margin-top: 28px;
+      color: #666;
+      font-size: 13px;
+    }
+
+    @media(max-width:900px) {
+      .row {
+        flex-direction: column
+      }
+
+      .sidebar {
+        display: none
+      }
+    }
   </style>
 </head>
+
 <body>
 
   <!-- Sidebar -->
@@ -73,7 +267,7 @@
     <footer>Version 1.1 • Admin Dashboard</footer>
   </div>
 
-  <!-- Modal (used for viewing single callback / patient / doctor forms) -->
+  <!-- Modal -->
   <div class="modal-backdrop" id="modalBackdrop">
     <div class="modal" id="modalContent"></div>
   </div>
@@ -91,349 +285,1064 @@
     const content = document.getElementById('content');
     const modalBackdrop = document.getElementById('modalBackdrop');
     const modalContent = document.getElementById('modalContent');
-    function showModal(html){ modalContent.innerHTML = html; modalBackdrop.style.display = 'flex'; }
-    function closeModal(){ modalBackdrop.style.display = 'none'; modalContent.innerHTML = ''; }
+
+    function showModal(html) { modalContent.innerHTML = html; modalBackdrop.style.display = 'flex'; }
+    function closeModal() { modalBackdrop.style.display = 'none'; modalContent.innerHTML = ''; }
     modalBackdrop.addEventListener('click', e => { if (e.target === modalBackdrop) closeModal(); });
 
-    // Sidebar nav
-    document.querySelectorAll('.menu-item').forEach(item=>{
-      item.addEventListener('click', ()=>{
-        document.querySelectorAll('.menu-item').forEach(i=>i.classList.remove('active'));
+    document.querySelectorAll('.menu-item').forEach(item => {
+      item.addEventListener('click', () => {
+        document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
         item.classList.add('active');
         const section = item.getAttribute('data-section');
         if (section === 'manageUsers') renderManageUsers();
         else if (section === 'appointments') renderAppointments();
-        else if (section === 'callbacks') renderCallbacks(); // <-- full page render now
+        else if (section === 'callbacks') renderCallbacks();
       });
     });
 
-    // ---------- helper fetches ----------
     async function fetchJson(url, opts = {}) {
       opts.headers = opts.headers || {};
       if (adminToken) opts.headers['Authorization'] = 'Bearer ' + adminToken;
-      try {
-        const res = await fetch(url, opts);
-        const data = await res.json();
-        return { ok: res.ok, data };
-      } catch (err) {
-        console.error('fetch error', url, err);
-        return { ok: false, data: null, err };
-      }
+      try { const res = await fetch(url, opts); return { ok: res.ok, data: await res.json() }; }
+      catch (err) { console.error('Fetch error', url, err); return { ok: false, data: null, err }; }
     }
 
-    // ---------- DOCTORS / PATIENTS (unchanged) ----------
-    async function fetchDoctors(){
+    function escapeHtml(str) { return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+    // ---------- Doctors ----------
+    async function fetchDoctors() {
       const r = await fetchJson(`${API_BASE}/api/admin/doctors`);
       window.doctors = (r.ok && r.data?.success) ? r.data.doctors || [] : [];
     }
 
-    async function fetchPatientsFromApi(){
-      const r = await fetchJson(`${API_BASE}/api/admin/patients`);
-      return (r.ok && r.data?.success) ? (r.data.patients || []) : [];
+    function openDoctorForm(doc) {
+      const d = doc || { name: '', email: '', phone: '', speciality: '', password: '', _id: '' };
+      showModal(`
+    <h3>${doc ? 'Edit' : 'Add'} Doctor</h3>
+    <label>Name</label><input id="df_name" value="${escapeHtml(d.name)}" />
+    <label>Email</label><input id="df_email" value="${escapeHtml(d.email)}" />
+    <label>Phone</label><input id="df_phone" value="${escapeHtml(d.phone)}" />
+    <label>Speciality</label><input id="df_spec" value="${escapeHtml(d.speciality)}" />
+    <label>Password</label><input id="df_pass" type="password" placeholder="${doc ? 'Leave blank' : ''}" />
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button class="btn" onclick="saveDoctor('${d._id}')">Save</button>
+      <button onclick="closeModal()">Cancel</button>
+    </div>
+  `);
     }
 
-    // ---------- CALLBACKS (page) ----------
-    // Expected endpoints:
-    // GET  /api/admin/callbacks
-    // PATCH /api/admin/callbacks/:id/contacted
-    // DELETE /api/admin/callbacks/:id
-
-    async function fetchCallbacks(){
-      const r = await fetchJson(`${API_BASE}/api/admin/callbacks`);
-      return (r.ok && r.data?.success) ? (r.data.callbacks || []) : [];
-    }
-
-    async function renderCallbacks(){
-      content.innerHTML = `
-        <div class="row">
-          <div class="card" style="flex:1;">
-            <h3>Requested Callbacks</h3>
-            <p class="small">Loading callbacks...</p>
-          </div>
-        </div>
-      `;
-      try {
-        const callbacks = await fetchCallbacks();
-        if (!callbacks || callbacks.length === 0) {
-          content.innerHTML = `
-            <div class="row">
-              <div class="card" style="flex:1;">
-                <h3>Requested Callbacks</h3>
-                <p class="small">No callbacks found.</p>
-              </div>
-            </div>
-          `;
-          return;
-        }
-
-        const rows = callbacks.map(cb => {
-          const created = cb.createdAt ? new Date(cb.createdAt).toLocaleString() : '-';
-          const statusClass = cb.contacted ? 'status-Contacted' : 'status-Pending';
-          const statusText = cb.contacted ? 'Contacted' : 'Pending';
-          return `
-            <tr data-id="${cb._id}">
-              <td>${escapeHtml(cb.name || '-')}</td>
-              <td>${escapeHtml(cb.phone || '-')}</td>
-              <td>${created}</td>
-              <td><span class="status-pill ${statusClass}">${statusText}</span></td>
-              <td class="actions" style="white-space:nowrap">
-                <button onclick="viewCallback('${cb._id}')">View</button>
-                ${cb.contacted ? '' : `<button onclick="markCallbackContacted('${cb._id}')">Mark Contacted</button>`}
-                <button onclick="deleteCallback('${cb._id}')">Delete</button>
-              </td>
-            </tr>
-          `;
-        }).join('');
-
-        content.innerHTML = `
-          <div class="row">
-            <div class="card" style="flex:1;">
-              <h3>Requested Callbacks</h3>
-              <div style="overflow:auto;">
-                <table>
-                  <tr>
-                    <th>Name</th><th>Phone</th><th>Requested At</th><th>Status</th><th>Actions</th>
-                  </tr>
-                  ${rows}
-                </table>
-              </div>
-            </div>
-          </div>
-        `;
-      } catch (err) {
-        console.error(err);
-        content.innerHTML = `<div class="row"><div class="card"><h3>Requested Callbacks</h3><p class="small">Error loading callbacks</p></div></div>`;
-      }
-    }
-
-    // helper: safe text
-    function escapeHtml(str){
-      return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    }
-
-    // actions used by table buttons (view opens modal)
-    async function viewCallback(id){
-      showModal(`<h3>Callback</h3><p>Loading...</p>`);
-      try {
-        // fetch single list and pick the callback (no single-get endpoint assumed)
-        const r = await fetchJson(`${API_BASE}/api/admin/callbacks`);
-        if (!r.ok || !r.data?.success) { modalContent.innerHTML = `<p>Failed to load</p>`; return; }
-        const cb = (r.data.callbacks || []).find(x => String(x._id) === String(id));
-        if (!cb) { modalContent.innerHTML = `<p>Callback not found</p>`; return; }
-        modalContent.innerHTML = `
-          <h3>Callback Request</h3>
-          <p><strong>Name:</strong> ${escapeHtml(cb.name || '-')}</p>
-          <p><strong>Phone:</strong> ${escapeHtml(cb.phone || '-')}</p>
-          <p><strong>Requested At:</strong> ${cb.createdAt ? new Date(cb.createdAt).toLocaleString() : '-'}</p>
-          <p><strong>Status:</strong> ${cb.contacted ? 'Contacted' : 'Pending'}</p>
-          <div style="margin-top:12px;display:flex;gap:8px">
-            ${!cb.contacted ? `<button class="btn" onclick="markCallbackContacted('${cb._id}')">Mark Contacted</button>` : ''}
-            <button onclick="deleteCallback('${cb._id}')">Delete</button>
-            <button onclick="closeModal()">Close</button>
-          </div>
-        `;
-      } catch (err) {
-        console.error(err);
-        modalContent.innerHTML = `<p>Error loading callback</p>`;
-      }
-    }
-
-    async function markCallbackContacted(id){
-      if (!confirm('Mark this callback as contacted?')) return;
-      const r = await fetchJson(`${API_BASE}/api/admin/callbacks/${id}/contacted`, { method: 'PATCH' });
-      if (!r.ok || !r.data?.success) {
-        alert(r.data?.message || 'Failed to mark contacted');
-        return;
-      }
-      // refresh current page (callbacks)
-      await renderCallbacks();
-      closeModal();
-    }
-
-    async function deleteCallback(id){
-      if (!confirm('Delete this callback?')) return;
-      const r = await fetchJson(`${API_BASE}/api/admin/callbacks/${id}`, { method: 'DELETE' });
-      if (!r.ok || !r.data?.success) {
-        alert(r.data?.message || 'Failed to delete callback');
-        return;
-      }
-      await renderCallbacks();
-      closeModal();
-    }
-
-    // ---------- Doctors / Patients / Appointments (kept similar to your previous file) ----------
-    async function saveDoctor(idv){
+    async function saveDoctor(idv) {
       const name = document.getElementById('df_name').value.trim();
       const email = document.getElementById('df_email').value.trim();
       const phone = document.getElementById('df_phone').value.trim();
       const speciality = document.getElementById('df_spec').value.trim();
       const password = document.getElementById('df_pass').value;
-      if(!name || !email || !phone || (!idv && !password)){ alert('All fields are required (password required for new doctor)'); return; }
-
+      if (!name || !email || !phone || (!idv && !password)) { alert('All fields required'); return; }
       const url = idv ? `${API_BASE}/api/admin/edit-doctor/${idv}` : `${API_BASE}/api/admin/add-doctor`;
       const method = idv ? 'PUT' : 'POST';
       const bodyData = idv ? { name, email, phone, speciality } : { name, email, phone, speciality, password };
-
       const r = await fetchJson(url, { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(bodyData) });
-      if (!r.ok || !r.data?.success) { alert(r.data?.message || 'Failed to save doctor'); return; }
-      alert(idv ? 'Doctor updated' : 'Doctor added');
-      closeModal();
-      await fetchDoctors(); renderManageUsers();
+      if (!r.ok || !r.data?.success) { alert(r.data?.message || 'Failed'); return; }
+      alert(idv ? 'Doctor updated' : 'Doctor added'); closeModal(); await fetchDoctors(); renderManageUsers();
     }
 
-    function openDoctorForm(doc){
-      const d = doc || { name:'', email:'', phone:'', speciality:'', password:'' };
-      showModal(`
-        <h3>${doc ? 'Edit' : 'Add'} Doctor</h3>
-        <label>Name</label><input id="df_name" value="${escapeHtml(d.name)}" />
-        <label>Email</label><input id="df_email" value="${escapeHtml(d.email)}" />
-        <label>Phone</label><input id="df_phone" value="${escapeHtml(d.phone)}" />
-        <label>Speciality</label><input id="df_spec" value="${escapeHtml(d.speciality||'')}" />
-        <label>Password</label><input id="df_pass" type="password" placeholder="${doc ? 'Leave blank to keep current' : ''}" />
-        <div style="margin-top:12px;display:flex;gap:8px">
-          <button class="btn" onclick="saveDoctor('${d._id||''}')">Save</button>
-          <button onclick="closeModal()">Cancel</button>
-        </div>
-      `);
-    }
-
-    function editDoctor(idv){
-      const doc = (window.doctors||[]).find(d=>d._id===idv);
-      if (doc) openDoctorForm(doc);
-    }
-
-    async function deleteDoctor(idv){
-      if(!confirm('Delete doctor?')) return;
+    async function deleteDoctor(idv) {
+      if (!confirm('Delete doctor?')) return;
       const r = await fetchJson(`${API_BASE}/api/admin/delete-doctor/${idv}`, { method: 'DELETE' });
-      if (!r.ok || !r.data?.success) { alert(r.data?.message || 'Failed to delete doctor'); return; }
+      if (!r.ok || !r.data?.success) { alert(r.data?.message || 'Failed'); return; }
       await fetchDoctors(); renderManageUsers();
     }
+    function editDoctor(idv) { const doc = (window.doctors || []).find(d => d._id === idv); if (doc) openDoctorForm(doc); }
 
-    async function adminViewPatient(id){
+    // ---------- Patients ----------
+    async function fetchPatients() { const r = await fetchJson(`${API_BASE}/api/admin/patients`); return (r.ok && r.data?.success) ? r.data.patients || [] : []; }
+
+    async function adminViewPatient(id) {
       showModal(`<h3>Patient</h3><p>Loading...</p>`);
-      const r = await fetchJson(`${API_BASE}/api/admin/patients`);
-      if (!r.ok || !r.data?.success) { modalContent.innerHTML = `<p>Failed to load</p>`; return; }
-      const p = (r.data.patients||[]).find(x=> String(x._id) === String(id));
-      if(!p){ modalContent.innerHTML = `<p>Patient not found</p>`; return; }
-      modalContent.innerHTML = `
-        <h3>${escapeHtml(p.name)}</h3>
-        <p><strong>Email:</strong> ${escapeHtml(p.email||'-')}</p>
-        <p><strong>Phone:</strong> ${escapeHtml(p.phone||'-')}</p>
-        <p><strong>Created:</strong> ${p.createdAt ? new Date(p.createdAt).toLocaleString() : '-'}</p>
-        <div style="margin-top:12px"><button class="btn" onclick="closeModal()">Close</button></div>
-      `;
+      const patients = await fetchPatients();
+      const p = patients.find(x => String(x._id) === String(id));
+      if (!p) { modalContent.innerHTML = `<p>Patient not found</p>`; return; }
+      modalContent.innerHTML = `<h3>${escapeHtml(p.name)}</h3>
+    <p><strong>Email:</strong> ${escapeHtml(p.email || '-')}</p>
+    <p><strong>Mobile:</strong> ${escapeHtml(p.phone || '-')}</p>
+    <p><strong>Created:</strong> ${p.createdAt ? new Date(p.createdAt).toLocaleString() : '-'}</p>
+    <div style="margin-top:12px"><button class="btn" onclick="closeModal()">Close</button></div>`;
     }
 
-    async function adminEditPatient(id){
+    async function adminEditPatient(id) {
       showModal(`<h3>Edit patient</h3><p>Loading...</p>`);
-      const r = await fetchJson(`${API_BASE}/api/admin/patients`);
-      if (!r.ok || !r.data?.success) { modalContent.innerHTML = `<p>Failed to load</p>`; return; }
-      const p = (r.data.patients||[]).find(x=> String(x._id) === String(id));
-      if(!p){ modalContent.innerHTML = `<p>Patient not found</p>`; return; }
-      modalContent.innerHTML = `
-        <h3>Edit patient</h3>
-        <label>Name</label><input id="ap_name" value="${escapeHtml(p.name||'')}" />
-        <label>Email</label><input id="ap_email" value="${escapeHtml(p.email||'')}" />
-        <label>Phone</label><input id="ap_phone" value="${escapeHtml(p.phone||'')}" />
-        <div style="margin-top:12px;display:flex;gap:8px">
-          <button class="btn" onclick="adminSavePatient('${id}')">Save</button>
-          <button onclick="closeModal()">Cancel</button>
-        </div>
-      `;
+      const patients = await fetchPatients();
+      const p = patients.find(x => String(x._id) === String(id));
+      if (!p) { modalContent.innerHTML = `<p>Patient not found</p>`; return; }
+      modalContent.innerHTML = `<h3>Edit Patient</h3>
+    <label>Name</label>
+    <input id="ap_name" value="${escapeHtml(p.name)}" />
+    <label>Email</label>
+    <input id="ap_email" value="${escapeHtml(p.email || '')}" />
+    <label>Mobile Number</label>
+    <input id="ap_phone" value="${escapeHtml(p.phone || '')}" placeholder="Enter mobile number" />
+    <div style="margin-top:12px; display:flex; gap:8px">
+      <button class="btn" onclick="adminSavePatient('${id}')">Save</button>
+      <button onclick="closeModal()">Cancel</button>
+    </div>`;
     }
 
-    async function adminSavePatient(id){
+    async function adminSavePatient(id) {
       const name = document.getElementById('ap_name').value.trim();
       const email = document.getElementById('ap_email').value.trim();
       const phone = document.getElementById('ap_phone').value.trim();
-      if(!name){ alert('Name required'); return; }
-      const r = await fetchJson(`${API_BASE}/api/admin/patients/${id}`, { method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ name, email, phone }) });
-      if(!r.ok || !r.data?.success){ alert(r.data?.message || 'Failed to update patient'); return; }
-      alert('Patient updated'); closeModal(); renderManageUsers();
+      if (!name) { alert('Name required'); return; }
+      if (phone && !/^\d{10}$/.test(phone)) { alert('Enter valid 10-digit mobile number'); return; }
+
+      const r = await fetchJson(`${API_BASE}/api/admin/patients/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone })
+      });
+      if (!r.ok || !r.data?.success) { alert(r.data?.message || 'Failed'); return; }
+      alert('Patient updated successfully'); closeModal(); renderManageUsers();
     }
 
-    async function adminDeletePatient(id){
-      if(!confirm('Delete patient?')) return;
-      const r = await fetchJson(`${API_BASE}/api/admin/patients/${id}`, { method:'DELETE' });
-      if(!r.ok || !r.data?.success){ alert(r.data?.message || 'Failed to delete patient'); return; }
+    // ---------- Files Management ----------
+    async function adminManageFiles(patientId, patientName) {
+      showModal(`<h3>Manage Files for ${patientName}</h3>
+    <div style="margin-bottom:12px;display:flex;gap:8px;align-items:center">
+      <input type="file" id="pf_input" />
+      <button class="btn" onclick="uploadPatientFile('${patientId}','${patientName.replace(/'/g, "\\\\'")}')">Upload</button>
+    </div>
+    <div id="pf_list">Loading files...</div>
+    <div style="margin-top:12px"><button onclick="closeModal()">Close</button></div>
+  `);
+      await loadPatientFiles(patientId);
+    }
+
+    async function loadPatientFiles(patientId) {
+      const div = document.getElementById('pf_list');
+      if (!div) return;
+      const r = await fetchJson(`${API_BASE}/api/admin/patients/${patientId}/files`);
+      if (!r.ok || !r.data?.success) { div.innerHTML = '<p>Failed to load files</p>'; return; }
+
+      const files = r.data.files || [];
+      if (!files.length) { div.innerHTML = '<p class="small">No files uploaded</p>'; return; }
+
+      div.innerHTML = `<table style="font-size:13px">
+    <tr><th>File Name</th><th>Size</th><th>Date</th><th>Actions</th></tr>
+    ${files.map(f => `
+      <tr>
+        <td><a href="/assets/patient_files/${f.filename}" target="_blank">${escapeHtml(f.originalName)}</a></td>
+        <td>${(f.size / 1024).toFixed(1)} KB</td>
+        <td>${new Date(f.createdAt).toLocaleDateString()}</td>
+        <td><button style="background:#DC3545;color:white;padding:4px 8px;font-size:12px" onclick="deletePatientFile('${f._id}', '${patientId}')">Delete</button></td>
+      </tr>
+    `).join('')}
+  </table>`;
+    }
+
+    async function uploadPatientFile(patientId, patientName) {
+      const input = document.getElementById('pf_input');
+      const file = input?.files[0];
+      if (!file) { alert('Select a file first'); return; }
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const r = await fetch(`${API_BASE}/api/admin/patients/${patientId}/files`, {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + adminToken }, // No Content-Type for FormData
+        body: formData
+      });
+      const data = await r.json();
+
+      if (!r.ok || !data.success) { alert(data.message || 'Upload failed'); return; }
+
+      alert('File uploaded');
+      input.value = ''; // clear input
+      await loadPatientFiles(patientId);
+    }
+
+    async function deletePatientFile(fileId, patientId) {
+      if (!confirm('Delete this file?')) return;
+      const r = await fetchJson(`${API_BASE}/api/admin/files/${fileId}`, { method: 'DELETE' });
+      if (!r.ok || !r.data?.success) { alert(r.data?.message || 'Delete failed'); return; }
+      await loadPatientFiles(patientId);
+    }
+
+    async function adminDeletePatient(id) {
+      if (!confirm('Delete patient?')) return;
+      const r = await fetchJson(`${API_BASE}/api/admin/patients/${id}`, { method: 'DELETE' });
+      if (!r.ok || !r.data?.success) { alert(r.data?.message || 'Failed'); return; }
       alert('Patient deleted'); renderManageUsers();
     }
 
-    // Render Manage Users
-    async function renderManageUsers(){
+    // ---------- Render Manage Users ----------
+    async function renderManageUsers() {
       content.innerHTML = `
-        <div class="row">
-          <div class="card" style="flex:1">
-            <h3>Doctors <button class="btn" style="margin-left:12px" onclick="openDoctorForm()">Add Doctor</button></h3>
-            <table id="doctorsTable"><tr><th>Name</th><th>Email</th><th>Phone</th><th>Speciality</th><th>Actions</th></tr>
-              <tr><td colspan="5" class="small">Loading doctors...</td></tr>
-            </table>
-          </div>
-        </div>
-        <div class="row">
-          <div class="card" style="flex:1">
-            <h3>Patients</h3>
-            <table id="patientsTable"><tr><th>Name</th><th>Email</th><th>Phone</th><th>Actions</th></tr>
-              <tr><td colspan="4" class="small">Loading patients...</td></tr>
-            </table>
-          </div>
-        </div>
-      `;
+    <div class="row"><div class="card" style="flex:1">
+      <h3>Doctors <button class="btn" style="margin-left:12px" onclick="openDoctorForm()">Add Doctor</button></h3>
+      <table id="doctorsTable"><tr><th>Name</th><th>Email</th><th>Phone</th><th>Speciality</th><th>Actions</th></tr><tr><td colspan="5" class="small">Loading doctors...</td></tr></table>
+    </div></div>
+    <div class="row"><div class="card" style="flex:1">
+      <h3>Patients</h3>
+      <table id="patientsTable"><tr><th>Name</th><th>Email</th><th>Mobile</th><th>Actions</th></tr><tr><td colspan="4" class="small">Loading patients...</td></tr></table>
+    </div></div>
+  `;
       await fetchDoctors();
-      const doctors = window.doctors || [];
       const dt = document.getElementById('doctorsTable');
-      if(!doctors.length) dt.innerHTML = `<tr><th>Name</th><th>Email</th><th>Phone</th><th>Speciality</th><th>Actions</th></tr><tr><td colspan="5">No doctors found</td></tr>`;
-      else dt.innerHTML = `<tr><th>Name</th><th>Email</th><th>Phone</th><th>Speciality</th><th>Actions</th></tr>` + doctors.map(d=>`<tr data-id="${d._id}"><td>${escapeHtml(d.name)}</td><td>${escapeHtml(d.email)}</td><td>${escapeHtml(d.phone)}</td><td>${escapeHtml(d.speciality||'-')}</td><td class="actions"><button onclick="editDoctor('${d._id}')">Edit</button><button onclick="deleteDoctor('${d._id}')">Delete</button></td></tr>`).join('');
-
-      const patients = await fetchPatientsFromApi();
+      const doctors = window.doctors || [];
+      dt.innerHTML = `<tr><th>Name</th><th>Email</th><th>Phone</th><th>Speciality</th><th>Actions</th></tr>` + (doctors.length ? doctors.map(d => `<tr data-id="${d._id}"><td>${escapeHtml(d.name)}</td><td>${escapeHtml(d.email)}</td><td>${escapeHtml(d.phone)}</td><td>${escapeHtml(d.speciality || '-')}</td><td class="actions"><button onclick="editDoctor('${d._id}')">Edit</button><button onclick="deleteDoctor('${d._id}')">Delete</button></td></tr>`).join('') : `<tr><td colspan="5">No doctors found</td></tr>`);
+      const patients = await fetchPatients();
       const pt = document.getElementById('patientsTable');
-      if(!patients.length) pt.innerHTML = `<tr><th>Name</th><th>Email</th><th>Phone</th><th>Actions</th></tr><tr><td colspan="4">No patients found</td></tr>`;
-      else pt.innerHTML = `<tr><th>Name</th><th>Email</th><th>Phone</th><th>Actions</th></tr>` + patients.map(p=>`<tr data-id="${p._id}"><td>${escapeHtml(p.name)}</td><td>${escapeHtml(p.email||'-')}</td><td>${escapeHtml(p.phone||'-')}</td><td class="actions"><button onclick="adminViewPatient('${p._id}')">View</button><button onclick="adminEditPatient('${p._id}')">Edit</button><button onclick="adminDeletePatient('${p._id}')">Delete</button></td></tr>`).join('');
+      pt.innerHTML = `<tr><th>Name</th><th>Email</th><th>Mobile</th><th>Actions</th></tr>` + (patients.length ? patients.map(p => `<tr data-id="${p._id}"><td>${escapeHtml(p.name)}</td><td>${escapeHtml(p.email || '-')}</td><td>${escapeHtml(p.phone || '-')}</td><td class="actions"><button onclick="adminManageFiles('${p._id}', '${escapeHtml(p.name).replace(/'/g, "\\\\'")}')">Files</button><button onclick="adminViewPatient('${p._id}')">View</button><button onclick="adminEditPatient('${p._id}')">Edit</button><button onclick="adminDeletePatient('${p._id}')">Delete</button></td></tr>`).join('') : `<tr><td colspan="4">No patients found</td></tr>`);
     }
 
-    // Render Appointments (same approach)
-    async function renderAppointments(){
-      content.innerHTML = `<div class="row"><div class="card" style="flex:1"><h3>Appointments</h3><p class="small">Loading appointments from server...</p></div></div>`;
-      try {
-        const r = await fetchJson(`${API_BASE}/api/admin/appointments`);
-        if (!r.ok || !r.data?.success) { content.innerHTML = `<div class="row"><div class="card"><h3>Appointments</h3><p class="small">${r.data?.message || 'Failed to load appointments'}</p></div></div>`; return; }
-        const rows = (r.data.appointments || []).map(a => `
-          <tr data-id="${a._id}">
-            <td>${escapeHtml(a.doctorName || '-')}</td>
-            <td>${escapeHtml(a.patientName || '-')}</td>
-            <td>${a.date ? new Date(a.date).toLocaleDateString() : '-'}</td>
-            <td>${escapeHtml(a.timeSlot || '-')}</td>
-            <td><span class="status-pill status-${escapeHtml(a.status || 'Pending')}">${escapeHtml(a.status || '')}</span></td>
-            <td class="actions" style="white-space: nowrap;">
-              <button style="background:#0A7BFF;color:white;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;" onclick="updateAppointmentStatus('${a._id}', 'Confirmed')">Confirm</button>
-              <button style="background:#28A745;color:white;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;" onclick="updateAppointmentStatus('${a._id}', 'Completed')">Complete</button>
-              <button style="background:#DC3545;color:white;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;" onclick="updateAppointmentStatus('${a._id}', 'Cancelled')">Cancel</button>
-            </td>
-          </tr>
-        `).join('');
+    // ---------- Appointments ----------
+    async function renderAppointments() {
+      // Filter card at top (sticky)
+      content.innerHTML = `<div class="row"><div class="card" style="flex:1;position:sticky;top:12px;z-index:60">
+    <h3>Filter Appointments</h3>
+    <div style="display:flex;gap:8px;align-items:center">
+      <label style="font-weight:600;font-size:13px;margin-right:6px">From</label>
+      <input id="filter_start" type="date" style="padding:6px;border-radius:6px;border:1px solid #ddd" />
+      <label style="font-weight:600;font-size:13px;margin:0 6px">To</label>
+      <input id="filter_end" type="date" style="padding:6px;border-radius:6px;border:1px solid #ddd" />
+      <button class="btn" style="font-size:12px;margin-left:8px" onclick="applyFilter()">Apply</button>
+      <button style="font-size:12px;margin-left:8px" onclick="clearFilter()">Clear</button>
+    </div>
+  </div></div>
 
-        content.innerHTML = `<div class="row"><div class="card" style="flex:1"><h3>Appointments</h3><table><tr><th>Doctor</th><th>Patient</th><th>Date</th><th>Time</th><th>Status</th><th>Actions</th></tr>${rows || `<tr><td colspan="6">No appointments found</td></tr>`}</table></div></div>`;
-      } catch (err) {
-        console.error(err);
-        content.innerHTML = `<div class="row"><div class="card"><h3>Appointments</h3><p class="small">Error while loading appointments</p></div></div>`;
+  <div class="row"><div class="card" style="flex:1">
+    <h3>Appointments <button class="btn" style="font-size:12px;margin-left:12px" onclick="openWalkinForm()">New Walk-in</button></h3>
+    <p class="small">Loading appointments...</p>
+  </div></div>`;
+      // ensure doctors list for walk-in form
+      await fetchDoctors();
+
+      const r = await fetchJson(`${API_BASE}/api/admin/appointments`);
+      // debug: response inspected during development
+      if (!r.ok || !r.data?.success) {
+        content.innerHTML = `<div class="row"><div class="card"><h3>Appointments</h3><p class="small">${r.data?.message || 'Failed to load appointments'}</p></div></div>`;
+        return;
+      }
+
+      const appointments = r.data.appointments || [];
+      // cache appointments for reuse
+      window.adminAppointments = appointments;
+      const today = new Date();
+
+      // ensure compact filter pill is present
+      ensureFilterPill();
+
+      // date range filter handling
+      const filterRange = getFilterRange();
+      let filteredHtml = '';
+      if (filterRange) {
+        const filteredAppointments = appointments.filter(a => dateInRange(a.date, filterRange.start, filterRange.end));
+
+        filteredHtml = `
+      <div class="row">
+        <div class="card" style="flex:1">
+          <h3>Filtered Appointments <button class="btn" style="font-size:12px;margin-left:12px" onclick="clearFilter()">Clear Filter</button></h3>
+          <table>
+            <tr><th>Doctor</th><th>Patient</th><th>Mobile</th><th>Date</th><th>Time</th><th>Status</th><th>Actions</th></tr>
+            ${filteredAppointments.length ? filteredAppointments.map(a => buildAppointmentRow(a, true)).join('') : '<tr><td colspan="7">No appointments found for this range</td></tr>'}
+          </table>
+        </div>
+      </div>
+    `;
+      }
+
+      // exclude completed from today's quick view
+      const todayAppointments = appointments.filter(a => new Date(a.date).toDateString() === today.toDateString() && a.status !== 'Completed' && a.status !== 'Acknowledged');
+
+      function renderRows(appts) {
+        return appts.map(a => `
+      <tr data-id="${a._id}">
+        <td>${escapeHtml(a.patientName || '-')}</td>
+        <td>${a.patientPhone && a.patientPhone !== '-' ? `<a href="tel:${escapeHtml(a.patientPhone)}">${escapeHtml(a.patientPhone)}</a>` : '-'}
+        </td>
+        <td>${escapeHtml(a.doctorName || '-')}</td>
+        <td>
+          <span class="status-pill status-${escapeHtml(a.status || 'Pending')}">${escapeHtml(a.status || '')}</span>
+          ${a.source === 'offline' ? `<span class="small"> &nbsp; (Offline)</span>` : ''}
+        </td>
+        <td class="actions">
+          ${a.status === 'Walk-in'
+            ? `<button style="background:#28A745;color:white" onclick="confirmComplete('${a._id}','${(a.patientName || '').replace(/'/g, "&#39;")}')">Complete</button>`
+            : (`
+              <button style="background:#0A7BFF;color:white" onclick="updateAppointmentStatus('${a._id}','Confirmed')">Confirm</button>
+              <button style="background:#28A745;color:white" onclick="confirmComplete('${a._id}','${(a.patientName || '').replace(/'/g, "&#39;")}')">Complete</button>
+              <button style="background:#DC3545;color:white" onclick="openCancelModal('${a._id}','${(a.patientName || '').replace(/'/g, "&#39;")}','${a.patientPhone || ''}','${a.doctorId || ''}','${a.date ? new Date(a.date).toISOString().slice(0, 10) : ''}','${escapeHtml(a.timeSlot || '')}')">Cancel</button>
+            `)
+          }
+        </td>
+      </tr>
+    `).join('');
+      }
+
+      content.innerHTML = `
+    <div class="row">
+      <div class="card" style="flex:1">
+        <h3>Today's Appointments <button class="btn" style="font-size:12px;margin-left:12px" onclick="openWalkinForm()">New Walk-in</button></h3>
+        <table>
+          <tr><th>Patient Name</th><th>Mobile</th><th>Doctor</th><th>Status</th><th>Actions</th></tr>
+          ${todayAppointments.length ? renderRows(todayAppointments) : '<tr><td colspan="5">No appointments today</td></tr>'}
+        </table>
+      </div>
+    </div>
+
+    ${filteredHtml}
+
+    <div class="row">
+      <div class="card" style="flex:1">
+        <h3>All Appointments</h3>
+        <table>
+          <tr><th>Doctor</th><th>Patient</th><th>Mobile</th><th>Date</th><th>Time</th><th>Status</th><th>Actions</th></tr>
+          ${appointments.length ? appointments.map(a => `
+            <tr data-id="${a._id}">
+              <td>${escapeHtml(a.doctorName || '-')}</td>
+              <td>${escapeHtml(a.patientName || '-')}</td>
+              <td>${a.patientPhone && a.patientPhone !== '-' ? `<a href="tel:${escapeHtml(a.patientPhone)}">${escapeHtml(a.patientPhone)}</a>` : '-'}
+              </td>
+              <td>${a.date ? new Date(a.date).toLocaleDateString() : '-'}</td>
+              <td>${escapeHtml(a.timeSlot || '-')}</td>
+              <td>
+                <span class="status-pill status-${escapeHtml(a.status || 'Pending')}">${escapeHtml(a.status || '')}</span>
+                ${a.source === 'offline' ? `<span class="small"> &nbsp; (Offline)</span>` : ''}
+              </td>
+              <td class="actions">
+                ${a.status === 'Walk-in'
+          ? `<button style="background:#28A745;color:white" onclick="confirmComplete('${a._id}','${(a.patientName || '').replace(/'/g, "&#39;")}')">Complete</button>`
+          : (`
+                    <button style="background:#0A7BFF;color:white" onclick="updateAppointmentStatus('${a._id}','Confirmed')">Confirm</button>
+                    <button style="background:#28A745;color:white" onclick="confirmComplete('${a._id}','${(a.patientName || '').replace(/'/g, "&#39;")}')">Complete</button>
+                    <button style="background:#DC3545;color:white" onclick="openCancelModal('${a._id}','${(a.patientName || '').replace(/'/g, "&#39;")}','${a.patientPhone || ''}','${a.doctorId || ''}','${a.date ? new Date(a.date).toISOString().slice(0, 10) : ''}','${escapeHtml(a.timeSlot || '')}')">Cancel</button>
+                  `)
+        }
+              </td>
+            </tr>
+          `).join('') : '<tr><td colspan="7">No appointments found</td></tr>'}
+        </table>
+      </div>
+    </div>
+  `;
+    }
+
+    // Open Walk-in modal
+    function openWalkinForm() {
+      const today = new Date().toISOString().slice(0, 10);
+      const doctorOptions = (window.doctors || []).map(d => `<option value="${d._id}">${escapeHtml(d.name)}</option>`).join('');
+      showModal(`
+    <h3>New Walk-in Appointment</h3>
+    <label>Patient Name</label>
+    <input id="wi_name" />
+    <label>Mobile Number</label>
+    <input id="wi_phone" />
+    <label>Email (optional)</label>
+    <input id="wi_email" placeholder="Optional email" />
+    <label>Doctor</label>
+    <select id="wi_doctor" onchange="updateWalkInAvailableSlots()">${doctorOptions}</select>
+    <label>Date</label>
+    <input id="wi_date" type="date" value="${today}" min="${today}" onchange="updateWalkInAvailableSlots()" />
+    <label>Time Slot</label>
+    <div id="wi_time_container" style="display:flex;flex-direction:column;gap:8px;margin-top:6px">
+      <input id="wi_time" placeholder="e.g., 02:00 PM" style="margin:0" />
+      <div id="wi_available_slots" style="font-size:12px;color:#666"></div>
+    </div>
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button class="btn" onclick="saveWalkin()">Save</button>
+      <button onclick="closeModal()">Cancel</button>
+    </div>
+  `);
+      updateWalkInAvailableSlots();
+    }
+
+    // Update available slots for walk-in
+    async function updateWalkInAvailableSlots() {
+      const doctorId = document.getElementById('wi_doctor')?.value;
+      const date = document.getElementById('wi_date')?.value;
+      const slotsDiv = document.getElementById('wi_available_slots');
+
+      if (!slotsDiv) return;
+
+      if (!doctorId || !date) {
+        slotsDiv.innerHTML = '<span style="color:#666">Select doctor and date</span>';
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE}/api/admin/appointments/doctor/availability?doctorId=${doctorId}&date=${date}`);
+        const data = await res.json();
+
+        if (data.success && data.available && data.available.length > 0) {
+          slotsDiv.innerHTML = `<strong style="color:#0A224C">Available slots:</strong> ${data.available.join(', ')}`;
+        } else {
+          slotsDiv.innerHTML = '<span style="color:#DC3545"><strong>No slots available</strong></span>';
+        }
+      } catch (e) {
+        console.error('Failed to fetch slots:', e);
+        slotsDiv.innerHTML = '<span style="color:#666">Could not load availability</span>';
       }
     }
 
-    async function updateAppointmentStatus(id, status){
-      if (!confirm(`Change status to "${status}"?`)) return;
-      const r = await fetchJson(`${API_BASE}/api/admin/appointments/${id}/status`, { method: 'PATCH', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ status }) });
-      if (!r.ok || !r.data?.success) { alert(r.data?.message || 'Failed to update'); return; }
+    // Open Cancel + Suggest slot modal
+    function openCancelModal(id, patientName, patientPhone, doctorId, date, timeSlot) {
+      const doctorOptions = (window.doctors || []).map(d => `<option value="${d._id}" ${d._id === doctorId ? 'selected' : ''}>${escapeHtml(d.name)}</option>`).join('');
+      // show patient/doctor details and suggest options
+      const doctorName = (window.doctors || []).find(d => String(d._id) === String(doctorId))?.name || '';
+      // show compact ACK modal (simplified)
+      showModal(`
+    <h3>ACKNOWLEDGE Appointment</h3>
+
+    <div style="display:flex;gap:16px;align-items:flex-start">
+      <div style="flex:1">
+        <p style="margin:0"><b>Patient:</b> ${escapeHtml(patientName)}<br><b>Mobile:</b> ${escapeHtml(patientPhone || '-')}</p>
+      </div>
+      <div style="flex:1">
+        <p style="margin:0"><b>Doctor:</b> ${escapeHtml(doctorName || '-')}<br><b>Date:</b> ${escapeHtml(date || '-')} <b>Time:</b> ${escapeHtml(timeSlot || '-')}</p>
+      </div>
+    </div>
+
+    <label style="margin-top:10px">Reason for acknowledging / cancellation</label>
+    <textarea id="cn_reason" rows="3" placeholder="Enter reason to inform the patient"></textarea>
+
+    <div style="margin-top:8px;display:flex;align-items:center;gap:8px">
+      <input id="cn_suggest_toggle" type="checkbox" onchange="document.getElementById('cn_suggest_fields').style.display = this.checked ? 'block' : 'none'" />
+      <label style="margin:0">Suggest alternate slot / doctor</label>
+    </div>
+
+    <div id="cn_suggest_fields" style="display:none;margin-top:8px">
+      <p class="small">Choose a slot from the dropdown for the doctor you specified and click "Add suggestion". Doctors free at the original requested slot are listed below.</p>
+      <label>Available slots for the doctor you specified</label>
+      <div id="cn_slots" style="display:flex;flex-direction:column;gap:6px;margin-top:6px"></div>
+
+      <label style="margin-top:8px">Doctors free at the original requested slot</label>
+      <div id="cn_orig_slot_doctors" class="small" style="margin-top:6px;color:#333"></div>
+
+      <div id="cn_slot_actions" style="margin-top:8px"></div>
+
+
+    </div>
+
+    <label style="margin-top:10px">Message preview (editable)</label>
+    <textarea id="cn_message" rows="4"></textarea>
+
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button class="btn" onclick="submitCancellation('${id}', true)">Acknowledge & Notify</button>
+      <button onclick="submitCancellation('${id}', false)">Acknowledge (Notify later)</button>
+      <button onclick="closeModal()">Cancel</button>
+    </div>
+  `);
+
+      // fetch availability (slots) and also fetch doctors free at original slot (for quick listing)
+      try { fetchDoctorAvailability(doctorId, date, true); } catch (e) { }
+      try { fetchDoctorsFreeAtOriginal(date, timeSlot); } catch (e) { }
+      // initial message preview
+      setTimeout(updateMessagePreview, 120);
+    }
+
+    async function submitCancellation(id, notifyNow) {
+      const reason = document.getElementById('cn_reason').value.trim();
+      const currSuggestions = (window.cn_suggestions || []);
+      const message = document.getElementById('cn_message')?.value || '';
+
+      if (!reason && !(currSuggestions && currSuggestions.length)) { alert('Provide a reason or add at least one suggestion'); return; }
+
+      const suggestions = (currSuggestions || []).map(s => ({ doctorId: s.doctorId, date: s.date, timeSlot: s.timeSlot }));
+
+      const r = await fetchJson(`${API_BASE}/api/admin/appointments/${id}/cancel`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ reason, suggestions, notifyNow: Boolean(notifyNow), message })
+      });
+
+      if (!r.ok || !r.data?.success) { alert(r.data?.message || 'Failed'); return; }
+
+      alert(r.data?.message || 'Appointment acknowledged');
+      closeModal();
+      // remove from UI
+      document.querySelectorAll(`tr[data-id="${id}"]`).forEach(tr => tr.remove());
+    }
+
+    // helper - build markup for a single appointment row
+    function buildAppointmentRow(a, isAll) {
+      const mobileCell = a.patientPhone && a.patientPhone !== '-' ? `<a href="tel:${escapeHtml(a.patientPhone)}">${escapeHtml(a.patientPhone)}</a>` : '-';
+      function formatStatus(st) { if (!st) return ''; if (st === 'Acknowledged') return 'ACKNOWLEDGE'; return st; }
+      const statusHtml = `<span class="status-pill status-${escapeHtml(a.status || 'Pending')}">${escapeHtml(formatStatus(a.status || ''))}</span>` + (a.source === 'offline' ? ` <span class="small">(Offline)</span>` : '');
+
+      const actions = a.status === 'Walk-in'
+        ? `<button style="background:#28A745;color:white" onclick="confirmComplete('${a._id}','${(a.patientName || '').replace(/'/g, "&#39;")}')">Complete</button>`
+        : (`<button style="background:#0A7BFF;color:white" onclick="updateAppointmentStatus('${a._id}','Confirmed')">Confirm</button>
+       <button style="background:#28A745;color:white" onclick="confirmComplete('${a._id}','${(a.patientName || '').replace(/'/g, "&#39;")}')">Complete</button>
+       <button style="background:#DC3545;color:white" onclick="openCancelModal('${a._id}','${(a.patientName || '').replace(/'/g, "&#39;")}','${a.patientPhone || ''}','${a.doctorId || ''}','${a.date ? new Date(a.date).toISOString().slice(0, 10) : ''}','${escapeHtml(a.timeSlot || '')}')">Cancel</button`);
+
+      if (isAll) {
+        return `
+      <tr data-id="${a._id}">
+        <td>${escapeHtml(a.doctorName || '-')}</td>
+        <td>${escapeHtml(a.patientName || '-')}</td>
+        <td>${mobileCell}</td>
+        <td>${a.date ? new Date(a.date).toLocaleDateString() : '-'}</td>
+        <td>${escapeHtml(a.timeSlot || '-')}</td>
+        <td>${statusHtml}</td>
+        <td class="actions">${actions}</td>
+      </tr>
+    `;
+      }
+
+      return `
+    <tr data-id="${a._id}">
+      <td>${escapeHtml(a.patientName || '-')}</td>
+      <td>${mobileCell}</td>
+      <td>${escapeHtml(a.doctorName || '-')}</td>
+      <td>${statusHtml}</td>
+      <td class="actions">${actions}</td>
+    </tr>
+  `;
+    }
+
+    function insertAppointmentInUI(a) {
+      try {
+        const today = new Date();
+        if (new Date(a.date).toDateString() === today.toDateString() && a.status !== 'Completed') {
+          // find the Today's Appointments card
+          document.querySelectorAll('div.card').forEach(card => {
+            const h3 = card.querySelector('h3');
+            if (h3 && h3.innerText.trim().startsWith("Today's Appointments")) {
+              const table = card.querySelector('table');
+              if (table) {
+                // remove placeholder row if present
+                const placeholder = table.querySelector('td[colspan="5"]');
+                if (placeholder) placeholder.parentElement.remove();
+                table.insertAdjacentHTML('beforeend', buildAppointmentRow(a, false));
+              }
+            }
+          });
+        }
+
+        // Add to All Appointments
+        document.querySelectorAll('div.card').forEach(card => {
+          const h3 = card.querySelector('h3');
+          if (h3 && h3.innerText.trim().startsWith('All Appointments')) {
+            const table = card.querySelector('table');
+            if (table) {
+              const placeholder = table.querySelector('td[colspan="7"]');
+              if (placeholder) placeholder.parentElement.remove();
+              table.insertAdjacentHTML('beforeend', buildAppointmentRow(a, true));
+            }
+          }
+        });
+
+        // cache
+        window.adminAppointments = window.adminAppointments || [];
+        window.adminAppointments.push(a);
+
+        // if a date filter is active and the appointment matches, insert into the filtered card too
+        try {
+          const currFilter = getFilterRange();
+          if (currFilter && dateInRange(a.date, currFilter.start, currFilter.end)) {
+            document.querySelectorAll('div.card').forEach(card => {
+              const h3 = card.querySelector('h3');
+              if (h3 && h3.innerText.trim().startsWith('Filtered Appointments')) {
+                const table = card.querySelector('table');
+                if (table) {
+                  const placeholder = table.querySelector('td[colspan="7"]');
+                  if (placeholder) placeholder.parentElement.remove();
+                  table.insertAdjacentHTML('beforeend', buildAppointmentRow(a, true));
+                }
+              }
+            });
+          }
+        } catch (e) {/* no-op */ }
+      } catch (err) { console.error('insertAppointmentInUI error', err) }
+    }
+
+    // Save walk-in to server
+    async function saveWalkin() {
+      const name = document.getElementById('wi_name').value.trim();
+      const phone = document.getElementById('wi_phone').value.trim();
+      const doctorId = document.getElementById('wi_doctor').value;
+      const date = document.getElementById('wi_date').value;
+      const timeSlot = document.getElementById('wi_time').value.trim();
+      const email = document.getElementById('wi_email').value.trim();
+
+      if (!name || !phone || !doctorId || !date || !timeSlot) { alert('All fields are required'); return; }
+
+      const r = await fetchJson(`${API_BASE}/api/admin/appointments/walkin`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, email, doctorId, date, timeSlot })
+      });
+
+      if (!r.ok || !r.data?.success) { alert(r.data?.message || 'Failed to create walk-in'); return; }
+
+      alert('Walk-in booked');
+      closeModal();
+      // insert the created appointment into the UI without reloading entire list
+      insertAppointmentInUI(r.data.appointment);
+    }
+
+    async function updateAppointmentStatus(id, status) {
+      const r = await fetchJson(
+        `${API_BASE}/api/admin/appointments/${id}/status`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ status })
+        }
+      );
+
+      if (!r.ok || !r.data?.success) {
+        alert(r.data?.message || 'Failed to update status');
+        return;
+      }
+
       renderAppointments();
     }
 
-    function logout(){ if(confirm('Logout?')){ localStorage.clear(); window.location.href = "login.html"; } }
+    // Confirmation modal for completing an appointment
+    function confirmComplete(id, patientName) {
+      showModal(`
+    <h3>Confirm Complete</h3>
+    <p>Mark appointment for <b>${escapeHtml(patientName)}</b> as <strong>Completed</strong>?</p>
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button class="btn" onclick="doComplete('${id}')">Confirm</button>
+      <button onclick="closeModal()">Cancel</button>
+    </div>
+  `);
+    }
 
-    // Init
-    (async function init(){
-      await fetchDoctors();
-      renderManageUsers(); // default landing
-    })();
+    // Perform completion and remove from Today's table only
+    async function doComplete(id) {
+      const r = await fetchJson(`${API_BASE}/api/admin/appointments/${id}/status`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: 'Completed' })
+      });
+
+      if (!r.ok || !r.data?.success) {
+        alert(r.data?.message || 'Failed to mark completed');
+        return;
+      }
+
+      closeModal();
+      // remove matching rows from all appointment tables on this page
+      document.querySelectorAll(`tr[data-id="${id}"]`).forEach(tr => tr.remove());
+      alert('Appointment marked completed');
+    }
+
+    // --- Date filter helpers + fixed filter bar ---
+    function dateOnly(d) {
+      if (!d) return '';
+      try { return new Date(d).toISOString().slice(0, 10); } catch (e) { return '' }
+    }
+    function dateInRange(dateStr, startStr, endStr) {
+      if (!startStr || !endStr) return false;
+      const d = dateOnly(dateStr);
+      return d >= startStr && d <= endStr;
+    }
+
+    // fetch available slots for a doctor on a date and render them inside cancel modal
+    async function fetchDoctorAvailability(doctorId, date, fetchDoctorsPerSlot) {
+      if (!doctorId || !date) return;
+      try {
+        const r = await fetchJson(`${API_BASE}/api/admin/appointments/doctor/availability?doctorId=${doctorId}&date=${date}`);
+        if (!r.ok || !r.data?.success) return;
+        const container = document.getElementById('cn_slots'); if (!container) return;
+        container.innerHTML = '';
+
+        // Show a single slots dropdown for the doctor specified
+        const slots = r.data.available || [];
+        const docName = (window.doctors || []).find(d => String(d._id) === String(doctorId))?.name || '';
+        if (!slots.length) { container.innerHTML = `<div><strong>${escapeHtml(docName) || 'Doctor'}</strong><div class="small">No available slots</div></div>`; return; }
+
+        const wrapper = document.createElement('div'); wrapper.style.display = 'flex'; wrapper.style.gap = '12px'; wrapper.style.alignItems = 'center'; wrapper.style.marginBottom = '6px';
+        const name = document.createElement('div'); name.style.fontWeight = '600'; name.style.minWidth = '160px'; name.innerText = docName || 'Selected doctor'; wrapper.appendChild(name);
+
+        const sel = document.createElement('select'); sel.id = 'cn_doctor_slots_select'; sel.style.padding = '6px'; sel.style.borderRadius = '6px'; sel.style.minWidth = '240px';
+        const emptyOpt = document.createElement('option'); emptyOpt.value = ''; emptyOpt.innerText = '(Choose a slot)'; sel.appendChild(emptyOpt);
+        const noneOpt = document.createElement('option'); noneOpt.value = 'NO_SLOT'; noneOpt.innerText = '(No slot)'; sel.appendChild(noneOpt);
+        slots.forEach(ss => { const opt = document.createElement('option'); opt.value = ss; opt.innerText = ss; sel.appendChild(opt); });
+        sel.onchange = () => { updateMessagePreview(); };
+        wrapper.appendChild(sel);
+
+        const add = document.createElement('button'); add.type = 'button'; add.className = 'btn'; add.innerText = 'Add suggestion';
+        add.onclick = () => {
+          const chosenSlot = sel.value;
+          if (!chosenSlot) { alert('Please choose a slot or select "(No slot)"'); return; }
+          const timeslotValue = chosenSlot === 'NO_SLOT' ? '' : chosenSlot;
+          addSuggestion({ doctorId: doctorId, doctorName: docName || '', date, timeSlot: timeslotValue });
+          wrapper.classList.add('selected');
+          updateMessagePreview();
+        };
+        wrapper.appendChild(add);
+
+        container.appendChild(wrapper);
+      } catch (e) { console.warn('Failed to fetch availability', e); }
+    }
+
+    // render slot actions: add slot to message and show doctor dropdown (exclude original doctor)
+    function renderSlotActions(slot, doctors, originalDoctorId, date) {
+      const container = document.getElementById('cn_slot_actions'); if (!container) return;
+      container.innerHTML = '';
+
+      const line = document.createElement('div'); line.style.display = 'flex'; line.style.gap = '8px'; line.style.alignItems = 'center';
+      line.innerHTML = `<div><strong>Selected slot:</strong> ${escapeHtml(slot)}</div>`;
+      const addBtn = document.createElement('button'); addBtn.className = 'btn'; addBtn.type = 'button'; addBtn.innerText = 'Add slot to message';
+      addBtn.onclick = () => {
+        // mark slot selected and update message
+        document.querySelectorAll('#cn_slots button').forEach(b => { if (b.getAttribute('data-slot') === slot) b.classList.add('selected'); });
+        updateMessagePreview();
+      };
+      line.appendChild(addBtn);
+
+      // doctor select (exclude the original doctor)
+      const selWrap = document.createElement('div'); selWrap.style.display = 'flex'; selWrap.style.gap = '6px'; selWrap.style.alignItems = 'center';
+      selWrap.innerHTML = `<label style="margin:0">Choose doctor:</label>`;
+      const sel = document.createElement('select'); sel.id = 'cn_doctor_select'; sel.style.padding = '6px'; sel.style.borderRadius = '6px'; sel.innerHTML = '<option value="">(Choose)</option>';
+      doctors.forEach(d => { if (String(d._id) === String(originalDoctorId)) return; const opt = document.createElement('option'); opt.value = d._id; opt.innerText = d.name; sel.appendChild(opt); });
+      sel.onchange = () => { updateMessagePreview(); }
+      selWrap.appendChild(sel);
+
+      const addDocBtn = document.createElement('button'); addDocBtn.className = 'btn'; addDocBtn.type = 'button'; addDocBtn.innerText = 'Add doctor to message';
+      addDocBtn.onclick = () => {
+        // when clicked, select it visually and update preview
+        const val = document.getElementById('cn_doctor_select').value;
+        if (!val) { alert('Pick a doctor'); return; }
+        // mark selected in cn_doctors area if exists
+        document.querySelectorAll('#cn_doctors button').forEach(b => b.classList.remove('selected'));
+        const b = Array.from(document.querySelectorAll('#cn_doctors button')).find(x => x.getAttribute('data-id') === val);
+        if (b) b.classList.add('selected');
+        updateMessagePreview();
+      };
+
+      selWrap.appendChild(addDocBtn);
+
+      container.appendChild(line);
+      container.appendChild(selWrap);
+    }
+
+    // fetch doctors available at date/time and render
+    async function fetchDoctorsAvailableAt(date, timeSlot) {
+      if (!date || !timeSlot) return;
+      try {
+        const r = await fetchJson(`${API_BASE}/api/admin/doctors/available?date=${date}&timeSlot=${encodeURIComponent(timeSlot)}`);
+        if (!r.ok || !r.data?.success) return;
+        const container = document.getElementById('cn_doctors'); if (!container) return;
+        container.innerHTML = '';
+        (r.data.available || []).forEach(d => {
+          const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'btn'; btn.style.padding = '6px 8px'; btn.style.fontSize = '13px'; btn.innerText = d.name; btn.setAttribute('data-id', d._id);
+          btn.onclick = () => { document.querySelectorAll('#cn_doctors button').forEach(b => b.classList.remove('selected')); btn.classList.add('selected'); updateMessagePreview(); }
+          container.appendChild(btn);
+        });
+        if (!(r.data.available || []).length) container.innerHTML = '<span class="small">No doctors available at that time</span>';
+      } catch (e) { console.warn('Failed to fetch available doctors', e); }
+    }
+
+    // fetch and render doctors free at the original requested slot (shown below slots)
+    async function fetchDoctorsFreeAtOriginal(date, timeSlot) {
+      const container = document.getElementById('cn_orig_slot_doctors'); if (!container) return;
+      container.innerHTML = 'Loading...';
+      if (!date || !timeSlot) { container.innerHTML = '<span class="small">No data</span>'; return; }
+      try {
+        const r = await fetchJson(`${API_BASE}/api/admin/doctors/available?date=${date}&timeSlot=${encodeURIComponent(timeSlot)}`);
+        if (!r.ok || !r.data?.available) { container.innerHTML = '<span class="small">No doctors free at that slot</span>'; return; }
+        container.innerHTML = '';
+        // add a 'No doctor' quick suggestion option
+        const nodiv = document.createElement('div'); nodiv.style.marginBottom = '8px';
+        const nobtn = document.createElement('button'); nobtn.type = 'button'; nobtn.className = 'btn'; nobtn.innerText = 'Suggest no doctor';
+        nobtn.onclick = () => { addSuggestion({ doctorId: '', doctorName: 'No doctor', date, timeSlot }); document.querySelectorAll('#cn_orig_slot_doctors button').forEach(b => b.classList.remove('selected')); nobtn.classList.add('selected'); updateMessagePreview(); };
+        nodiv.appendChild(nobtn);
+        container.appendChild(nodiv);
+
+        (r.data.available || []).forEach(d => {
+          const div = document.createElement('div'); div.style.display = 'flex'; div.style.justifyContent = 'space-between'; div.style.alignItems = 'center'; div.style.marginBottom = '6px';
+          const name = document.createElement('div'); name.style.fontWeight = '600'; name.innerText = d.name; div.appendChild(name);
+          const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'btn'; btn.innerText = 'Suggest this doctor';
+          btn.onclick = () => { addSuggestion({ doctorId: d._id, doctorName: d.name, date, timeSlot }); document.querySelectorAll('#cn_orig_slot_doctors button').forEach(b => b.classList.remove('selected')); btn.classList.add('selected'); updateMessagePreview(); };
+          div.appendChild(btn);
+          container.appendChild(div);
+        });
+        if (!(r.data.available || []).length) container.innerHTML = '<span class="small">No doctors free at that slot</span>';
+      } catch (e) { container.innerHTML = '<span class="small">Failed to load</span>'; console.warn('Failed to fetch docs for original slot', e); }
+    }
+
+    // suggestion helpers
+    window.cn_suggestions = window.cn_suggestions || [];
+    function addSuggestion(s) {
+      // s = { doctorId, doctorName, date, timeSlot }
+      window.cn_suggestions.push(s);
+      renderSuggestions();
+      updateMessagePreview();
+    }
+    function removeSuggestion(idx) {
+      window.cn_suggestions.splice(idx, 1);
+      renderSuggestions();
+      updateMessagePreview();
+    }
+    function renderSuggestions() {
+      const c = document.getElementById('cn_slot_actions'); if (!c) return;
+      let list = document.getElementById('cn_suggestions_list');
+      if (!list) { list = document.createElement('div'); list.id = 'cn_suggestions_list'; list.style.marginTop = '8px'; c.appendChild(list); }
+      list.innerHTML = '';
+      (window.cn_suggestions || []).forEach((s, idx) => {
+        const tag = document.createElement('div'); tag.style.display = 'flex'; tag.style.alignItems = 'center'; tag.style.gap = '8px'; tag.style.marginTop = '6px'; tag.style.padding = '6px'; tag.style.border = '1px solid #e6edf6'; tag.style.borderRadius = '8px';
+        tag.innerHTML = `<div style="font-weight:600">${escapeHtml(s.doctorName)} — ${escapeHtml(s.timeSlot)} on ${escapeHtml(s.date || '')}</div>`;
+        const rem = document.createElement('button'); rem.className = 'btn'; rem.type = 'button'; rem.innerText = 'Remove'; rem.onclick = () => removeSuggestion(idx);
+        tag.appendChild(rem);
+        list.appendChild(tag);
+      });
+    }
+
+    function renderDoctorsForSlot(slot, doctors) {
+      const c = document.getElementById('cn_doctors'); if (!c) return;
+      c.innerHTML = '';
+      doctors.forEach(d => {
+        const div = document.createElement('div'); div.style.display = 'flex'; div.style.justifyContent = 'space-between'; div.style.gap = '8px'; div.style.alignItems = 'center'; div.style.marginBottom = '6px';
+        const name = document.createElement('div'); name.style.fontWeight = '600'; name.innerText = d.name; div.appendChild(name);
+
+        // derive appointment date from modal header (no editable suggestion date)
+        const modalText = document.getElementById('modalContent')?.innerText || '';
+        const dateMatch = modalText.match(/Date:\s*([0-9\/-]+)/);
+        const date = dateMatch ? dateMatch[1] : '';
+        const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'btn'; btn.innerText = 'Suggest this doctor';
+        btn.onclick = () => { addSuggestion({ doctorId: d._id, doctorName: d.name, date, timeSlot: slot }); document.querySelectorAll('#cn_doctors button').forEach(b => b.classList.remove('selected')); btn.classList.add('selected'); updateMessagePreview(); }
+        div.appendChild(btn);
+
+        c.appendChild(div);
+      });
+      if (!doctors.length) c.innerHTML = '<span class="small">No doctors available at that slot</span>';
+    }
+
+    function updateMessagePreview() {
+      try {
+        const reason = document.getElementById('cn_reason')?.value || '';
+        const modalText = document.getElementById('modalContent')?.innerText || '';
+        const match = modalText.match(/Patient:\s*(.*?)\s/);
+        const patientName = match ? match[1] : '';
+
+        let parts = [];
+        if (reason) parts.push(`Reason: ${reason}`);
+
+        const suggs = window.cn_suggestions || [];
+        if (suggs.length) {
+          const stexts = suggs.map(s => {
+            const doctor = s.doctorName || 'No doctor';
+            const slot = s.timeSlot || 'No slot';
+            const d = s.date ? ` on ${s.date}` : '';
+            return `${doctor} — ${slot}${d}`;
+          });
+          parts.push(`Suggested — ${stexts.join(' | ')}`);
+        }
+
+        const message = `Hello ${patientName || ''}, your appointment has been acknowledged/cancelled.` + (parts.length ? ` ${parts.join(' | ')}` : '');
+
+        const ta = document.getElementById('cn_message'); if (ta) ta.value = message;
+      } catch (e) {/* no-op */ }
+    }
+
+    // update preview on changes
+    document.addEventListener('input', e => {
+      if (e.target && (e.target.id === 'cn_reason' || e.target.id === 'cn_message')) setTimeout(updateMessagePreview, 50);
+    });
+    function getFilterRange() {
+      // prefer fixed/pill bar (always visible) values if present
+      const s = document.getElementById('filter_start')?.value || document.getElementById('filter_start_fixed')?.value || document.getElementById('filter_start_pill')?.value || '';
+      const e = document.getElementById('filter_end')?.value || document.getElementById('filter_end_fixed')?.value || document.getElementById('filter_end_pill')?.value || '';
+      if (!s && !e) return null;
+      let start = s || e;
+      let end = e || s;
+      if (start > end) { const t = start; start = end; end = t; }
+      return { start, end };
+    }
+    function applyFilter() { renderAppointments(); }
+    function clearFilter() { const fs = document.getElementById('filter_start'); const fe = document.getElementById('filter_end'); if (fs) fs.value = ''; if (fe) fe.value = ''; const fsf = document.getElementById('filter_start_fixed'); const fef = document.getElementById('filter_end_fixed'); if (fsf) fsf.value = ''; if (fef) fef.value = ''; const fsp = document.getElementById('filter_start_pill'); const fep = document.getElementById('filter_end_pill'); if (fsp) fsp.value = ''; if (fep) fep.value = ''; updateFilterPillLabel(); renderAppointments(); }
+
+    function ensureFilterPill() {
+      if (document.getElementById('filterPill')) return;
+      const html = `
+    <div id="filterPill" style="position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:9999">
+      <div id="filterPillButton" style="background:#fff;border-radius:999px;padding:6px 12px;box-shadow:0 6px 18px rgba(0,0,0,0.08);display:flex;gap:8px;align-items:center;cursor:pointer;border:1px solid #e6eefb" onclick="toggleFilterPill(event)">
+        <span style="font-weight:700;color:#0A224C">Filter</span>
+        <span id="filterPillLabel" style="font-weight:600;color:#555;margin-left:6px">—</span>
+      </div>
+      <div id="filterPillPopup" style="display:none;position:absolute;top:44px;left:50%;transform:translateX(-50%);background:#fff;padding:12px;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.12);min-width:320px">
+        <div style="display:flex;gap:8px;align-items:center">
+          <label style="font-weight:600;font-size:13px">From</label>
+          <input id="filter_start_pill" type="date" style="padding:6px;border-radius:6px;border:1px solid #ddd" onchange="updateFilterPillLabel()" />
+          <label style="font-weight:600;font-size:13px">To</label>
+          <input id="filter_end_pill" type="date" style="padding:6px;border-radius:6px;border:1px solid #ddd" onchange="updateFilterPillLabel()" />
+        </div>
+        <div style="margin-top:8px;display:flex;gap:8px;justify-content:flex-end">
+          <button class="btn" onclick="applyFilterFromPill()">Apply</button>
+          <button onclick="clearFilterFromPill()">Clear</button>
+        </div>
+      </div>
+    </div>
+  `;
+      document.body.insertAdjacentHTML('beforeend', html);
+
+      // close when clicking outside
+      document.addEventListener('click', e => {
+        const pill = document.getElementById('filterPill');
+        const popup = document.getElementById('filterPillPopup');
+        if (!pill || !popup) return;
+        if (!pill.contains(e.target) && popup.style.display === 'block') {
+          popup.style.display = 'none';
+        }
+      });
+
+      updateFilterPillLabel();
+    }
+
+    function toggleFilterPill(e) {
+      const popup = document.getElementById('filterPillPopup'); if (!popup) return;
+      popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function updateFilterPillLabel() {
+      const s = document.getElementById('filter_start_pill')?.value || '';
+      const e = document.getElementById('filter_end_pill')?.value || '';
+      const label = document.getElementById('filterPillLabel');
+      if (!label) return;
+      if (!s && !e) label.innerText = '—';
+      else if (s && !e) label.innerText = s;
+      else if (!s && e) label.innerText = e;
+      else label.innerText = s === e ? s : `${s} → ${e}`;
+    }
+
+    function applyFilterFromPill() {
+      const s = document.getElementById('filter_start_pill')?.value || '';
+      const e = document.getElementById('filter_end_pill')?.value || '';
+      // mirror values to inline card if present
+      const fs = document.getElementById('filter_start'); if (fs) fs.value = s;
+      const fe = document.getElementById('filter_end'); if (fe) fe.value = e;
+      // close popup
+      const popup = document.getElementById('filterPillPopup'); if (popup) popup.style.display = 'none';
+      renderAppointments();
+    }
+
+    function clearFilterFromPill() {
+      const fs = document.getElementById('filter_start'); const fe = document.getElementById('filter_end'); if (fs) fs.value = ''; if (fe) fe.value = '';
+      const fsf = document.getElementById('filter_start_pill'); const fef = document.getElementById('filter_end_pill'); if (fsf) fsf.value = ''; if (fef) fef.value = '';
+      updateFilterPillLabel();
+      const popup = document.getElementById('filterPillPopup'); if (popup) popup.style.display = 'none';
+      renderAppointments();
+    }
+
+
+    // ---------- Callbacks ----------
+    async function renderCallbacks() {
+      content.innerHTML = `
+    <div class="row">
+      <div class="card" style="flex:1">
+        <h3>Callbacks</h3>
+        <p class="small">Loading callbacks...</p>
+      </div>
+    </div>
+  `;
+
+      const r = await fetchJson(`${API_BASE}/api/admin/callbacks`);
+      if (!r.ok || !r.data?.success) {
+        content.innerHTML = `<p>Failed to load callbacks</p>`;
+        return;
+      }
+
+      const callbacks = r.data.callbacks || [];
+
+      content.innerHTML = `
+    <div class="row">
+      <div class="card" style="flex:1">
+        <h3>Callbacks</h3>
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+          ${callbacks.length
+          ? callbacks.map(c => `
+                <tr data-id="${c._id}">
+                  <td>${escapeHtml(c.name)}</td>
+                  <td>${escapeHtml(c.phone)}</td>
+                  <td>
+                    <span class="status-pill status-${c.status}">
+                      ${c.status}
+                    </span>
+                  </td>
+                  <td class="actions">
+                    ${c.status === "Pending"
+              ? `<button style="background:#28A745;color:white"
+                              onclick="markCallbackDone('${c._id}')">
+                              Mark Done
+                           </button>`
+              : `<span class="small">—</span>`
+            }
+                    ${c.status === "Done"
+              ? `<button style="background:#DC3545;color:white"
+                              onclick="deleteCallback('${c._id}')">
+                              Delete
+                           </button>`
+              : ''
+            }
+                  </td>
+                </tr>
+              `).join('')
+          : `<tr><td colspan="4">No callbacks found</td></tr>`
+        }
+        </table>
+      </div>
+    </div>
+  `;
+    }
+
+    // Mark callback as Done
+    async function markCallbackDone(id) {
+      if (!confirm("Mark this callback as Done?")) return;
+
+      const r = await fetchJson(
+        `${API_BASE}/api/admin/callbacks/${id}/contacted`,
+        { method: "PATCH" }
+      );
+
+      if (!r.ok || !r.data?.success) {
+        alert(r.data?.message || "Failed to update callback");
+        return;
+      }
+
+      renderCallbacks();
+    }
+
+    // Delete callback
+    async function deleteCallback(id) {
+      if (!confirm("Delete this callback permanently?")) return;
+
+      const r = await fetchJson(
+        `${API_BASE}/api/admin/callbacks/${id}`,
+        { method: "DELETE" }
+      );
+
+      if (!r.ok || !r.data?.success) {
+        alert(r.data?.message || "Failed to delete callback");
+        return;
+      }
+
+      renderCallbacks();
+    }
+
+
+    // ---------- Logout ----------
+    function logout() { localStorage.removeItem('dentcare_user'); window.location.href = 'login.html'; }
+
+    // Initial
+    // Ensure compact filter pill exists (visible across pages)
+    ensureFilterPill();
+    renderManageUsers();
   </script>
 
 </body>
+
 </html>

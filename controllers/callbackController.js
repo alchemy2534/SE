@@ -22,7 +22,8 @@ exports.getAllCallbacks = async (req, res) => {
 exports.markCallbackContacted = async (req, res) => {
   try {
     const id = req.params.id;
-    const cb = await CallbackRequest.findByIdAndUpdate(id, { contacted: true }, { new: true });
+    const cb = await CallbackRequest.findByIdAndUpdate(id, { contacted: true, status: "Done" }, { new: true });
+
     if (!cb) return res.status(404).json({ success: false, message: 'Callback not found' });
     return res.json({ success: true, callback: cb });
   } catch (err) {

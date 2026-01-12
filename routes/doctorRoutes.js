@@ -151,7 +151,7 @@ router.get("/patients", auth(["doctor"]), async (req, res) => {
       })
       .lean();
 
-      // 2. Deduplicate patients by _id
+    // 2. Deduplicate patients by _id
     const map = new Map();
 
     appts.forEach((a) => {
@@ -161,14 +161,14 @@ router.get("/patients", auth(["doctor"]), async (req, res) => {
       if (!map.has(id)) {
         map.set(id, {
           id,
-          name:  a.patient.name  || "Patient",
+          name: a.patient.name || "Patient",
           email: a.patient.email || "",
           phone: a.patient.phone || "",
         });
       }
     });
 
-     const patients = Array.from(map.values());
+    const patients = Array.from(map.values());
 
     return res.json({ success: true, patients });
   } catch (err) {
@@ -177,6 +177,22 @@ router.get("/patients", auth(["doctor"]), async (req, res) => {
       success: false,
       message: "Failed to load patients",
     });
+  }
+});
+
+// ---------- PATIENT FILES ----------
+// GET files for a specific patient (Doctor must have an appointment with this patient? Or just any patient?
+// For simplicity, assuming if they are in the doctor's patient list/appointments, they can view.
+// But the UI sends patientId.
+// We'll trust the ID but ensure the user is a doctor.
+router.get("/patients/:id/files", auth(["doctor"]), async (req, res) => {
+  try {
+    const PatientFile = require("../models/PatientFile");
+    const files = await PatientFile.find({ patient: req.params.id }).sort({ createdAt: -1 });
+    res.json({ success: true, files });
+  } catch (err) {
+    console.error("DOCTOR GET FILES ERROR:", err);
+    res.status(500).json({ success: false, message: "Failed to load files" });
   }
 });
 

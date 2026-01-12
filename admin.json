@@ -1,0 +1,9 @@
+[
+    {
+        "name": "Admin",
+        "email": "admin@gmail.com",
+        "password": "$2b$10$hY4odNNZ3lcrMINnnmYYKuwVd5a3HHdirMkHNOeM6jamF0kD5nJNe",
+        "phone": "0000000000",
+        "role": "admin"
+    }
+]

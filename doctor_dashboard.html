@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,206 +9,263 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root{
-      --nav:#0A224C;
-      --bg:#f5f7fb;
-      --card:#ffffff;
-      --muted:#cfd8e6;
-      --accent:#0A224C;
-      --radius:12px;
+    :root {
+      --nav: #0A224C;
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --muted: #cfd8e6;
+      --accent: #0A224C;
+      --radius: 12px;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      padding:0;
-      font-family:'Poppins',sans-serif;
-      background:var(--bg);
-      height:100vh;
-      display:flex;
-      overflow:hidden;
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      height: 100vh;
+      display: flex;
+      overflow: hidden;
     }
 
     /* Sidebar */
-    .sidebar{
-      width:260px;
-      background:var(--nav);
-      color:#fff;
-      padding:28px 20px;
-      display:flex;
-      flex-direction:column;
-      gap:14px;
+    .sidebar {
+      width: 260px;
+      background: var(--nav);
+      color: #fff;
+      padding: 28px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
     }
-    .brand{
-      font-size:20px;
-      font-weight:700;
-      margin-bottom:10px;
+
+    .brand {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
     }
-    .menu-item{
-      padding:12px 14px;
-      border-radius:10px;
-      cursor:pointer;
-      font-size:15px;
-      font-weight:500;
-      transition:all .18s;
+
+    .menu-item {
+      padding: 12px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 500;
+      transition: all .18s;
     }
+
     .menu-item:hover,
-    .menu-item.active{
-      background:#fff;
-      color:var(--nav);
-      font-weight:600;
+    .menu-item.active {
+      background: #fff;
+      color: var(--nav);
+      font-weight: 600;
     }
-    .sidebar-spacer{flex:1}
+
+    .sidebar-spacer {
+      flex: 1
+    }
 
     /* Main */
-    .main{
-      flex:1;
-      padding:24px;
-      overflow:auto;
+    .main {
+      flex: 1;
+      padding: 24px;
+      overflow: auto;
     }
-    header{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      margin-bottom:18px;
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
     }
-    header h2{
-      margin:0;
-      color:var(--nav);
-      font-weight:700;
+
+    header h2 {
+      margin: 0;
+      color: var(--nav);
+      font-weight: 700;
     }
-    .header-right{
-      font-size:14px;
-      color:#555;
+
+    .header-right {
+      font-size: 14px;
+      color: #555;
     }
-    .btn{
-      background:var(--accent);
-      color:#fff;
-      padding:8px 14px;
-      border-radius:10px;
-      border:none;
-      cursor:pointer;
-      font-weight:600;
-      font-size:14px;
+
+    .btn {
+      background: var(--accent);
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 14px;
     }
 
     /* Cards + tables */
-    .row{
-      display:flex;
-      gap:18px;
-      margin-bottom:18px;
-      flex-wrap:wrap;
-    }
-    .card{
-      background:var(--card);
-      padding:18px;
-      border-radius:18px;
-      box-shadow:0 8px 20px rgba(0,0,0,0.06);
-      flex:1;
-      border:2px solid var(--nav);
-      min-width:300px;
-    }
-    .card h3{
-      margin:0 0 8px;
-      color:var(--nav);
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:8px;
-    }
-    .small{font-size:13px;color:#666}
-
-    table{
-      width:100%;
-      border-collapse:collapse;
-      font-size:14px;
-      margin-top:10px;
-    }
-    th,td{
-      padding:10px;
-      border-bottom:1px solid #e6edf6;
-      text-align:left;
-      vertical-align:middle;
-    }
-    th{
-      background:var(--nav);
-      color:#fff;
-    }
-    .actions button{
-      margin-right:4px;
-      margin-bottom:4px;
-      font-size:12px;
-      padding:6px 10px;
-      border-radius:8px;
-      border:none;
-      cursor:pointer;
-    }
-    .btn-status{
-      background:#e1ecff;
-      color:#0A224C;
-    }
-    .btn-next{
-      background:#0A224C;
-      color:#fff;
+    .row {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
     }
 
-    .status-pill{
-      display:inline-block;
-      padding:4px 10px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:600;
+    .card {
+      background: var(--card);
+      padding: 18px;
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+      flex: 1;
+      border: 2px solid var(--nav);
+      min-width: 300px;
     }
-    .status-Pending{background:#fff3cd;color:#856404;border:1px solid #ffeeba;}
-    .status-Confirmed{background:#d4edda;color:#155724;border:1px solid #c3e6cb;}
-    .status-Completed{background:#cce5ff;color:#004085;border:1px solid #b8daff;}
-    .status-Cancelled{background:#f8d7da;color:#721c24;border:1px solid #f5c6cb;}
+
+    .card h3 {
+      margin: 0 0 8px;
+      color: var(--nav);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .small {
+      font-size: 13px;
+      color: #666
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      border-bottom: 1px solid #e6edf6;
+      text-align: left;
+      vertical-align: middle;
+    }
+
+    th {
+      background: var(--nav);
+      color: #fff;
+    }
+
+    .actions button {
+      margin-right: 4px;
+      margin-bottom: 4px;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-status {
+      background: #e1ecff;
+      color: #0A224C;
+    }
+
+    .btn-next {
+      background: #0A224C;
+      color: #fff;
+    }
+
+    .status-pill {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .status-Pending {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+    }
+
+    .status-Confirmed {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .status-Completed {
+      background: #cce5ff;
+      color: #004085;
+      border: 1px solid #b8daff;
+    }
+
+    .status-Cancelled {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
 
     /* Modal */
-    .modal-backdrop{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,0.45);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      z-index:999;
-    }
-    .modal{
-      background:#fff;
-      padding:18px;
-      border-radius:14px;
-      min-width:320px;
-      max-width:480px;
-    }
-    label{
-      display:block;
-      font-weight:600;
-      color:var(--nav);
-      margin-top:8px;
-      font-size:14px;
-    }
-    input,select,textarea{
-      width:100%;
-      padding:10px;
-      border-radius:8px;
-      border:1.6px solid var(--muted);
-      margin-top:6px;
-      font-size:14px;
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
     }
 
-    footer{
-      margin-top:28px;
-      color:#666;
-      font-size:13px;
+    .modal {
+      background: #fff;
+      padding: 18px;
+      border-radius: 14px;
+      min-width: 320px;
+      max-width: 480px;
     }
 
-    @media(max-width:900px){
-      .row{flex-direction:column}
-      .sidebar{display:none}
+    label {
+      display: block;
+      font-weight: 600;
+      color: var(--nav);
+      margin-top: 8px;
+      font-size: 14px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1.6px solid var(--muted);
+      margin-top: 6px;
+      font-size: 14px;
+    }
+
+    footer {
+      margin-top: 28px;
+      color: #666;
+      font-size: 13px;
+    }
+
+    @media(max-width:900px) {
+      .row {
+        flex-direction: column
+      }
+
+      .sidebar {
+        display: none
+      }
     }
   </style>
 </head>
+
 <body>
 
   <!-- SIDEBAR -->
@@ -239,85 +297,85 @@
   </div>
 
   <script>
-  const API_BASE = "http://localhost:5000";
+    const API_BASE = "http://localhost:5000";
 
-  // Logged-in doctor
-  const doctorUser = JSON.parse(localStorage.getItem("dentcare_user")) || {};
-  if (!doctorUser.token || doctorUser.role !== "doctor") {
-    alert("Doctor not logged in");
-    window.location.href = "login.html";
-  }
+    // Logged-in doctor
+    const doctorUser = JSON.parse(localStorage.getItem("dentcare_user")) || {};
+    if (!doctorUser.token || doctorUser.role !== "doctor") {
+      alert("Doctor not logged in");
+      window.location.href = "login.html";
+    }
 
-  document.getElementById("doctorInfo").innerText =
-    doctorUser.name ? `Logged in as Dr. ${doctorUser.name}` : "Doctor";
+    document.getElementById("doctorInfo").innerText =
+      doctorUser.name ? `Logged in as Dr. ${doctorUser.name}` : "Doctor";
 
-  let appointmentsCache = [];
-  let remindersCache   = [];
+    let appointmentsCache = [];
+    let remindersCache = [];
 
-  /** ---------- MODAL HELPERS ---------- **/
-  const modalBackdrop = document.getElementById("modalBackdrop");
-  const modalContent  = document.getElementById("modalContent");
+    /** ---------- MODAL HELPERS ---------- **/
+    const modalBackdrop = document.getElementById("modalBackdrop");
+    const modalContent = document.getElementById("modalContent");
 
-  function showModal(html) {
-    modalContent.innerHTML = html;
-    modalBackdrop.style.display = "flex";
-  }
-  function closeModal() {
-    modalBackdrop.style.display = "none";
-    modalContent.innerHTML = "";
-  }
-  modalBackdrop.addEventListener("click", (e) => {
-    if (e.target === modalBackdrop) closeModal();
-  });
+    function showModal(html) {
+      modalContent.innerHTML = html;
+      modalBackdrop.style.display = "flex";
+    }
+    function closeModal() {
+      modalBackdrop.style.display = "none";
+      modalContent.innerHTML = "";
+    }
+    modalBackdrop.addEventListener("click", (e) => {
+      if (e.target === modalBackdrop) closeModal();
+    });
 
-  /** ---------- API HELPERS ---------- **/
-  async function fetchAppointments() {
-    try {
-      const res = await fetch(`${API_BASE}/api/doctor/appointments`, {
-        headers: { "Authorization": "Bearer " + doctorUser.token }
-      });
-      const data = await res.json();
-      if (!res.ok || !data.success) {
-        console.error("APPT FETCH ERROR:", data);
+    /** ---------- API HELPERS ---------- **/
+    async function fetchAppointments() {
+      try {
+        const res = await fetch(`${API_BASE}/api/doctor/appointments`, {
+          headers: { "Authorization": "Bearer " + doctorUser.token }
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+          console.error("APPT FETCH ERROR:", data);
+          appointmentsCache = [];
+          return;
+        }
+        appointmentsCache = data.appointments || [];
+      } catch (err) {
+        console.error("APPT FETCH ERROR:", err);
         appointmentsCache = [];
-        return;
       }
-      appointmentsCache = data.appointments || [];
-    } catch (err) {
-      console.error("APPT FETCH ERROR:", err);
-      appointmentsCache = [];
     }
-  }
 
-  // status update
-  async function updateStatus(apptId, newStatus) {
-    if (!confirm(`Change status to ${newStatus}?`)) return;
-    try {
-      const res = await fetch(`${API_BASE}/api/doctor/appointments/${apptId}/status`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + doctorUser.token
-        },
-        body: JSON.stringify({ status: newStatus })
-      });
-      const data = await res.json();
-      if (!res.ok || !data.success) {
-        console.error("STATUS UPDATE ERROR:", data);
-        alert(data.message || "Failed to update status");
-        return;
+    // status update
+    async function updateStatus(apptId, newStatus) {
+      if (!confirm(`Change status to ${newStatus}?`)) return;
+      try {
+        const res = await fetch(`${API_BASE}/api/doctor/appointments/${apptId}/status`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + doctorUser.token
+          },
+          body: JSON.stringify({ status: newStatus })
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+          console.error("STATUS UPDATE ERROR:", data);
+          alert(data.message || "Failed to update status");
+          return;
+        }
+        await fetchAppointments();
+        routeTo(currentSection());
+      } catch (err) {
+        console.error(err);
+        alert("Error while updating status");
       }
-      await fetchAppointments();
-      routeTo(currentSection());
-    } catch (err) {
-      console.error(err);
-      alert("Error while updating status");
     }
-  }
 
-  function openNextApptModal(apptId, patientName) {
-    const today = new Date().toISOString().slice(0, 10);
-    showModal(`
+    function openNextApptModal(apptId, patientName) {
+      const today = new Date().toISOString().slice(0, 10);
+      showModal(`
       <h3>Schedule Next Appointment</h3>
       <p class="small">Patient: <b>${patientName}</b></p>
       <label>Next Date</label>
@@ -336,65 +394,65 @@
         <button onclick="closeModal()">Cancel</button>
       </div>
     `);
-  }
-
-  async function scheduleNext(apptId) {
-    const date = document.getElementById("next_date").value;
-    const timeSlot = document.getElementById("next_time").value;
-    if (!date || !timeSlot) {
-      alert("Please choose date and time");
-      return;
     }
 
-    try {
-      const res = await fetch(`${API_BASE}/api/doctor/appointments/${apptId}/next`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + doctorUser.token
-        },
-        body: JSON.stringify({ date, timeSlot })
-      });
-      const data = await res.json();
-      if (!res.ok || !data.success) {
-        console.error("NEXT APPT ERROR:", data);
-        alert(data.message || "Failed to schedule next appointment");
+    async function scheduleNext(apptId) {
+      const date = document.getElementById("next_date").value;
+      const timeSlot = document.getElementById("next_time").value;
+      if (!date || !timeSlot) {
+        alert("Please choose date and time");
         return;
       }
-      alert("Next appointment created!");
-      closeModal();
-      await fetchAppointments();
-      routeTo("appointments");
-    } catch (err) {
-      console.error(err);
-      alert("Error while scheduling next appointment");
+
+      try {
+        const res = await fetch(`${API_BASE}/api/doctor/appointments/${apptId}/next`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + doctorUser.token
+          },
+          body: JSON.stringify({ date, timeSlot })
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+          console.error("NEXT APPT ERROR:", data);
+          alert(data.message || "Failed to schedule next appointment");
+          return;
+        }
+        alert("Next appointment created!");
+        closeModal();
+        await fetchAppointments();
+        routeTo("appointments");
+      } catch (err) {
+        console.error(err);
+        alert("Error while scheduling next appointment");
+      }
     }
-  }
 
-  /** ---------- REMINDERS (DB) ---------- **/
+    /** ---------- REMINDERS (DB) ---------- **/
 
-  async function fetchReminders() {
-    try {
-      const res = await fetch(`${API_BASE}/api/doctor/reminders`, {
-        headers: { "Authorization": "Bearer " + doctorUser.token }
-      });
-      const data = await res.json();
-      if (!res.ok || !data.success) {
-        console.error("REM FETCH ERROR:", data);
+    async function fetchReminders() {
+      try {
+        const res = await fetch(`${API_BASE}/api/doctor/reminders`, {
+          headers: { "Authorization": "Bearer " + doctorUser.token }
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+          console.error("REM FETCH ERROR:", data);
+          remindersCache = [];
+          return;
+        }
+        remindersCache = data.reminders || [];
+      } catch (err) {
+        console.error("REM FETCH ERROR:", err);
         remindersCache = [];
-        return;
       }
-      remindersCache = data.reminders || [];
-    } catch (err) {
-      console.error("REM FETCH ERROR:", err);
-      remindersCache = [];
     }
-  }
 
-  function renderRemindersPage() {
-    const rows = remindersCache.map(r => {
-      const d = r.date ? new Date(r.date).toLocaleDateString("en-GB") : "";
-      return `
+    function renderRemindersPage() {
+      const rows = remindersCache.map(r => {
+        const d = r.date ? new Date(r.date).toLocaleDateString("en-GB") : "";
+        return `
         <tr>
           <td>${r.patientName}</td>
           <td>${r.description}</td>
@@ -405,9 +463,9 @@
           </td>
         </tr>
       `;
-    }).join("");
+      }).join("");
 
-    content.innerHTML = `
+      content.innerHTML = `
       <div class="card">
         <h3>
           Reminders
@@ -424,11 +482,11 @@
         </table>
       </div>
     `;
-  }
+    }
 
-  function openReminderForm() {
-    const today = new Date().toISOString().slice(0,10);
-    showModal(`
+    function openReminderForm() {
+      const today = new Date().toISOString().slice(0, 10);
+      showModal(`
       <h3>New Reminder</h3>
       <label>Patient Name</label>
       <input id="rm_patient" />
@@ -444,95 +502,95 @@
         <button onclick="closeModal()">Cancel</button>
       </div>
     `);
-  }
-
-  async function saveReminder() {
-    const patientName = document.getElementById("rm_patient").value.trim();
-    const description = document.getElementById("rm_desc").value.trim();
-    const date        = document.getElementById("rm_date").value;
-
-    if (!patientName || !description || !date) {
-      alert("Patient name, description and date are required");
-      return;
     }
 
-    try {
-      const res = await fetch(`${API_BASE}/api/doctor/reminders`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + doctorUser.token
-        },
-        body: JSON.stringify({ patientName, description, date })
-      });
-      const data = await res.json();
-      if (!res.ok || !data.success) {
-        console.error("REM CREATE ERROR:", data);
-        alert(data.message || "Failed to create reminder");
+    async function saveReminder() {
+      const patientName = document.getElementById("rm_patient").value.trim();
+      const description = document.getElementById("rm_desc").value.trim();
+      const date = document.getElementById("rm_date").value;
+
+      if (!patientName || !description || !date) {
+        alert("Patient name, description and date are required");
         return;
       }
-      closeModal();
-      await fetchReminders();
-      renderRemindersPage();
-    } catch (err) {
-      console.error(err);
-      alert("Error while creating reminder");
-    }
-  }
 
-  async function markReminderDone(id) {
-    try {
-      const res = await fetch(`${API_BASE}/api/doctor/reminders/${id}`, {
-        method: "PATCH",
-        headers: { "Authorization": "Bearer " + doctorUser.token }
-      });
-      const data = await res.json();
-      if (!res.ok || !data.success) {
-        console.error("REM DONE ERROR:", data);
-        alert(data.message || "Failed to update reminder");
-        return;
+      try {
+        const res = await fetch(`${API_BASE}/api/doctor/reminders`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + doctorUser.token
+          },
+          body: JSON.stringify({ patientName, description, date })
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+          console.error("REM CREATE ERROR:", data);
+          alert(data.message || "Failed to create reminder");
+          return;
+        }
+        closeModal();
+        await fetchReminders();
+        renderRemindersPage();
+      } catch (err) {
+        console.error(err);
+        alert("Error while creating reminder");
       }
-      await fetchReminders();
-      renderRemindersPage();
-    } catch (err) {
-      console.error(err);
-      alert("Error while updating reminder");
     }
-  }
 
-  async function deleteReminder(id) {
-    if (!confirm("Delete this reminder?")) return;
-    try {
-      const res = await fetch(`${API_BASE}/api/doctor/reminders/${id}`, {
-        method: "DELETE",
-        headers: { "Authorization": "Bearer " + doctorUser.token }
-      });
-      const data = await res.json();
-      if (!res.ok || !data.success) {
-        console.error("REM DELETE ERROR:", data);
-        alert(data.message || "Failed to delete reminder");
-        return;
+    async function markReminderDone(id) {
+      try {
+        const res = await fetch(`${API_BASE}/api/doctor/reminders/${id}`, {
+          method: "PATCH",
+          headers: { "Authorization": "Bearer " + doctorUser.token }
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+          console.error("REM DONE ERROR:", data);
+          alert(data.message || "Failed to update reminder");
+          return;
+        }
+        await fetchReminders();
+        renderRemindersPage();
+      } catch (err) {
+        console.error(err);
+        alert("Error while updating reminder");
       }
-      await fetchReminders();
-      renderRemindersPage();
-    } catch (err) {
-      console.error(err);
-      alert("Error while deleting reminder");
     }
-  }
 
-  /** ---------- RENDER HELPERS ---------- **/
-  const content = document.getElementById("content");
+    async function deleteReminder(id) {
+      if (!confirm("Delete this reminder?")) return;
+      try {
+        const res = await fetch(`${API_BASE}/api/doctor/reminders/${id}`, {
+          method: "DELETE",
+          headers: { "Authorization": "Bearer " + doctorUser.token }
+        });
+        const data = await res.json();
+        if (!res.ok || !data.success) {
+          console.error("REM DELETE ERROR:", data);
+          alert(data.message || "Failed to delete reminder");
+          return;
+        }
+        await fetchReminders();
+        renderRemindersPage();
+      } catch (err) {
+        console.error(err);
+        alert("Error while deleting reminder");
+      }
+    }
 
-  function renderDashboard() {
-    const todayStr = new Date().toISOString().slice(0, 10);
-    const todayAppts = appointmentsCache.filter(a =>
-      a.date && a.date.slice(0,10) === todayStr
-    );
-    const pending = appointmentsCache.filter(a => a.status === "Pending").length;
-    const confirmed = appointmentsCache.filter(a => a.status === "Confirmed").length;
+    /** ---------- RENDER HELPERS ---------- **/
+    const content = document.getElementById("content");
 
-    content.innerHTML = `
+    function renderDashboard() {
+      const todayStr = new Date().toISOString().slice(0, 10);
+      const todayAppts = appointmentsCache.filter(a =>
+        a.date && a.date.slice(0, 10) === todayStr
+      );
+      const pending = appointmentsCache.filter(a => a.status === "Pending").length;
+      const confirmed = appointmentsCache.filter(a => a.status === "Confirmed").length;
+
+      content.innerHTML = `
       <div class="row">
         <div class="card">
           <h3>Today at a glance</h3>
@@ -551,38 +609,62 @@
               <div class="small">Confirmed</div>
             </div>
           </div>
+
+          <div style="margin-top:12px">
+            <h4 style="margin:6px 0">Today's Appointments</h4>
+            <table>
+              <tr><th>Time</th><th>Patient</th><th>Phone</th><th>Status</th></tr>
+              ${todayAppts
+          .map(a => {
+            const time = a.timeSlot || a.time || "";
+            const pName = a.patient?.name || a.patientName || "Patient";
+            const pPhone = a.patient?.phone || a.patientPhone || "-";
+            const status = a.status || "Pending";
+            return `
+                      <tr>
+                        <td>${time}</td>
+                        <td>${pName}</td>
+                        <td>${pPhone}</td>
+                        <td><span class="status-pill status-${status}">${status}</span></td>
+                      </tr>
+                    `;
+          }).join("") || `<tr><td colspan="4">No appointments for today.</td></tr>`
+        }
+            </table>
+          </div>
         </div>
 
         <div class="card">
           <h3>Next few appointments</h3>
           <table>
-            <tr><th>Date</th><th>Time</th><th>Patient</th><th>Status</th></tr>
-            ${
-              appointmentsCache
-                .slice()
-                .sort((a,b)=>new Date(a.date)-new Date(b.date))
-                .slice(0,5)
-                .map(a => {
-                  const d = a.date ? new Date(a.date).toLocaleDateString("en-GB") : "";
-                  const pName = a.patient?.name || a.patientName || "Patient";
-                  return `
+            <tr><th>Date</th><th>Time</th><th>Patient</th><th>Phone</th><th>Status</th></tr>
+            ${appointmentsCache
+          .slice()
+          .sort((a, b) => new Date(a.date) - new Date(b.date))
+          .slice(0, 5)
+          .map(a => {
+            const d = a.date ? new Date(a.date).toLocaleDateString("en-GB") : "";
+            const pName = a.patient?.name || a.patientName || "Patient";
+            const pPhone = a.patient?.phone || a.patientPhone || "-";
+            return `
                     <tr>
                       <td>${d}</td>
                       <td>${a.timeSlot || a.time || ""}</td>
                       <td>${pName}</td>
+                      <td>${pPhone}</td>
                       <td><span class="status-pill status-${a.status || "Pending"}">${a.status || "Pending"}</span></td>
                     </tr>
                   `;
-                }).join("") || `<tr><td colspan="4">No appointments found.</td></tr>`
-            }
+          }).join("") || `<tr><td colspan="5">No appointments found.</td></tr>`
+        }
           </table>
         </div>
       </div>
     `;
-  }
+    }
 
-  function renderAppointments() {
-    content.innerHTML = `
+    function renderAppointments() {
+      content.innerHTML = `
       <div class="card">
         <h3>All Appointments</h3>
         <table>
@@ -590,144 +672,197 @@
             <th>Date</th>
             <th>Time</th>
             <th>Patient</th>
+            <th>Phone</th>
             <th>Status</th>
             <th>Actions</th>
           </tr>
-          ${
-            appointmentsCache
-              .slice()
-              .sort((a,b)=>new Date(a.date)-new Date(b.date))
-              .map(a => {
-                const d = a.date ? new Date(a.date).toLocaleDateString("en-GB") : "";
-                const time = a.timeSlot || a.time || "";
-                const pName = a.patient?.name || a.patientName || "Patient";
+          ${appointmentsCache
+          .slice()
+          .sort((a, b) => new Date(a.date) - new Date(b.date))
+          .map(a => {
+            const d = a.date ? new Date(a.date).toLocaleDateString("en-GB") : "";
+            const time = a.timeSlot || a.time || "";
+            const pName = a.patient?.name || a.patientName || "Patient";
+            const pPhone = a.patient?.phone || a.patientPhone || "-";
 
-                const status = a.status || "Pending";
-                let actionBtns = "";
+            const status = a.status || "Pending";
+            let actionBtns = "";
 
-                if (status === "Pending") {
-                  actionBtns += `<button class="btn-status" onclick="updateStatus('${a._id}','Confirmed')">Confirm</button>`;
-                  actionBtns += `<button class="btn-status" onclick="updateStatus('${a._id}','Cancelled')">Cancel</button>`;
-                } else if (status === "Confirmed") {
-                  actionBtns += `<button class="btn-status" onclick="updateStatus('${a._id}','Completed')">Complete</button>`;
-                  actionBtns += `<button class="btn-status" onclick="updateStatus('${a._id}','Cancelled')">Cancel</button>`;
-                }
+            if (status === "Pending") {
+              actionBtns += `<button class="btn-status" onclick="updateStatus('${a._id}','Confirmed')">Confirm</button>`;
+              actionBtns += `<button class="btn-status" onclick="updateStatus('${a._id}','Cancelled')">Cancel</button>`;
+            } else if (status === "Confirmed") {
+              actionBtns += `<button class="btn-status" onclick="updateStatus('${a._id}','Completed')">Complete</button>`;
+              actionBtns += `<button class="btn-status" onclick="updateStatus('${a._id}','Cancelled')">Cancel</button>`;
+            }
 
-                if (status === "Completed" || status === "Cancelled" || status === "Confirmed") {
-                  actionBtns += `<button class="btn-next" onclick="openNextApptModal('${a._id}','${pName.replace(/'/g,"&#39;")}')">Next Visit</button>`;
-                }
+            if (status === "Completed" || status === "Cancelled" || status === "Confirmed") {
+              actionBtns += `<button class="btn-next" onclick="openNextApptModal('${a._id}','${pName.replace(/'/g, "&#39;")}')">Next Visit</button>`;
+            }
 
-                return `
+            return `
                   <tr>
                     <td>${d}</td>
                     <td>${time}</td>
                     <td>${pName}</td>
+                    <td>${pPhone}</td>
                     <td><span class="status-pill status-${status}">${status}</span></td>
                     <td class="actions">${actionBtns || "-"}</td>
                   </tr>
                 `;
-              }).join("") || `<tr><td colspan="5">No appointments found.</td></tr>`
-          }
+          }).join("") || `<tr><td colspan="6">No appointments found.</td></tr>`
+        }
         </table>
       </div>
     `;
-  }
+    }
 
-  // Patients derived from appointmentsCache
-  function renderPatients() {
-    const map = new Map();
+    // Patients derived from appointmentsCache
+    function renderPatients() {
+      const map = new Map();
 
-    appointmentsCache.forEach(a => {
-      const p = a.patient || {};
-      const id =
-        p._id || a.patientId || p.id || p.email || p.name;
+      appointmentsCache.forEach(a => {
+        const p = a.patient || {};
+        const id =
+          p._id || a.patientId || p.id || p.email || p.name;
 
-      if (!id) return;
-      if (!map.has(id)) {
-        map.set(id, {
-          name:  p.name  || a.patientName || "Patient",
-          phone: p.phone || "",
-          email: p.email || ""
-        });
-      }
-    });
+        if (!id) return;
+        if (!map.has(id)) {
+          map.set(id, {
+            id,
+            name: p.name || a.patientName || "Patient",
+            phone: p.phone || "",
+            email: p.email || ""
+          });
+        }
+      });
 
-    const patients = Array.from(map.values());
+      const patients = Array.from(map.values());
 
-    content.innerHTML = `
+      content.innerHTML = `
       <div class="card">
         <h3>My Patients</h3>
         <p class="small">Patients who have appointments with you.</p>
         <table>
-          <tr><th>Name</th><th>Phone</th><th>Email</th></tr>
-          ${
-            patients.map(p => `
+          <tr><th>Name</th><th>Phone</th><th>Email</th><th>Actions</th></tr>
+          ${patients.map(p => `
               <tr>
                 <td>${p.name}</td>
                 <td>${p.phone || "-"}</td>
                 <td>${p.email || "-"}</td>
+                <td class="actions">
+                  <button class="btn-status" onclick="viewPatientFiles('${p.id}', '${p.name.replace(/'/g, "\\\\'")}')">Files</button>
+                </td>
               </tr>
-            `).join("") || `<tr><td colspan="3">No patients yet.</td></tr>`
-          }
+            `).join("") || `<tr><td colspan="4">No patients yet.</td></tr>`
+        }
         </table>
       </div>
     `;
-  }
-
-  /** ---------- ROUTING ---------- **/
-  function currentSection() {
-    const el = document.querySelector(".menu-item.active[data-section]");
-    return el ? el.dataset.section : "dashboard";
-  }
-
-  async function routeTo(section) {
-    document.querySelectorAll(".menu-item[data-section]").forEach(m =>
-      m.classList.toggle("active", m.dataset.section === section)
-    );
-
-    if (section === "dashboard" || section === "appointments" || section === "patients") {
-      if (!appointmentsCache.length) await fetchAppointments();
     }
-    if (section === "reminders") {
+
+    async function viewPatientFiles(patientId, patientName) {
+      showModal(`<h3>Files for ${patientName}</h3>
+      <div id="pf_list">Loading files...</div>
+      <div style="margin-top:12px"><button onclick="closeModal()">Close</button></div>
+    `);
+
+      try {
+        const res = await fetch(`${API_BASE}/api/doctor/patients/${patientId}/files`, {
+          headers: { "Authorization": "Bearer " + doctorUser.token }
+        });
+        const data = await res.json();
+
+        const div = document.getElementById("pf_list");
+        if (!div) return;
+
+        if (!res.ok || !data.success) {
+          div.innerHTML = "<p>Failed to load files</p>";
+          return;
+        }
+
+        const files = data.files || [];
+        if (files.length === 0) {
+          div.innerHTML = "<p class='small'>No files found for this patient.</p>";
+          return;
+        }
+
+        div.innerHTML = `<table style="font-size:13px;width:100%">
+        <tr><th>File Name</th><th>Size</th><th>Date</th></tr>
+        ${files.map(f => `
+          <tr>
+            <td><a href="${API_BASE}/assets/patient_files/${f.filename}" target="_blank">${f.originalName}</a></td>
+            <td>${(f.size / 1024).toFixed(1)} KB</td>
+            <td>${new Date(f.createdAt).toLocaleDateString()}</td>
+          </tr>
+        `).join('')}
+      </table>`;
+
+      } catch (err) {
+        console.error(err);
+        const div = document.getElementById("pf_list");
+        if (div) div.innerHTML = "<p>Error loading files</p>";
+      }
+    }
+
+    // expose
+    window.viewPatientFiles = viewPatientFiles;
+
+    /** ---------- ROUTING ---------- **/
+    function currentSection() {
+      const el = document.querySelector(".menu-item.active[data-section]");
+      return el ? el.dataset.section : "dashboard";
+    }
+
+    async function routeTo(section) {
+      document.querySelectorAll(".menu-item[data-section]").forEach(m =>
+        m.classList.toggle("active", m.dataset.section === section)
+      );
+
+      if (section === "dashboard" || section === "appointments" || section === "patients") {
+        if (!appointmentsCache.length) await fetchAppointments();
+      }
+      if (section === "reminders") {
+        await fetchReminders();
+      }
+
+      switch (section) {
+        case "patients": renderPatients(); break;
+        case "appointments": renderAppointments(); break;
+        case "reminders": renderRemindersPage(); break;
+        default: renderDashboard(); break;
+      }
+    }
+
+    document.querySelectorAll(".menu-item[data-section]").forEach(item => {
+      item.addEventListener("click", () => routeTo(item.dataset.section));
+    });
+
+    function logout() {
+      if (confirm("Logout?")) {
+        localStorage.clear();
+        window.location.href = "login.html";
+      }
+    }
+
+    (async function init() {
+      await fetchAppointments();
       await fetchReminders();
-    }
+      routeTo("dashboard");
+    })();
 
-    switch (section) {
-      case "patients":     renderPatients(); break;
-      case "appointments": renderAppointments(); break;
-      case "reminders":    renderRemindersPage(); break;
-      default:             renderDashboard(); break;
-    }
-  }
-
-  document.querySelectorAll(".menu-item[data-section]").forEach(item => {
-    item.addEventListener("click", () => routeTo(item.dataset.section));
-  });
-
-  function logout() {
-    if (confirm("Logout?")) {
-      localStorage.clear();
-      window.location.href = "login.html";
-    }
-  }
-
-  (async function init() {
-    await fetchAppointments();
-    await fetchReminders();
-    routeTo("dashboard");
-  })();
-
-  // expose for inline handlers
-  window.updateStatus      = updateStatus;
-  window.openNextApptModal = openNextApptModal;
-  window.scheduleNext      = scheduleNext;
-  window.openReminderForm  = openReminderForm;
-  window.saveReminder      = saveReminder;
-  window.markReminderDone  = markReminderDone;
-  window.deleteReminder    = deleteReminder;
-  window.logout            = logout;
-  window.routeTo           = routeTo;
+    // expose for inline handlers
+    window.updateStatus = updateStatus;
+    window.openNextApptModal = openNextApptModal;
+    window.scheduleNext = scheduleNext;
+    window.openReminderForm = openReminderForm;
+    window.saveReminder = saveReminder;
+    window.markReminderDone = markReminderDone;
+    window.deleteReminder = deleteReminder;
+    window.logout = logout;
+    window.routeTo = routeTo;
   </script>
 
 </body>
+
 </html>
